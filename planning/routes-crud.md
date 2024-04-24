@@ -15,20 +15,21 @@ POST /logout (deletes cookie & redirects to homepage)
 
 MAPS
 
-Browse - GET  / and redirect to /maps (home page/list of maps)
-Read   - GET  /api/maps/:map_id (clicking onto a specific map)
-Edit   - POST /maps/:map_id/edit (modifying a map's name or image)
-Add    - POST /maps/new (creating a new map)
-Delete - ? 
+Browse - GET  /maps (show list of maps)
+Read   - GET  /maps/:map_id (view a specific map)
+Edit   - POST /maps/:map_id (modifying a map's name or image)
+Add    - GET  /maps/new (form for creating a new map)
+       - POST /maps (create new map)
+Delete - POST /maps/:map_id/delete (delete map)
 
 
 MARKERS
 
 Browse - ? (maps autopopulate the markers in /maps/:map_id)
-Read   - GET  /api/maps/:map_id/:marker_id
-Edit   - POST /maps/:map_id/:marker_id/edit 
-Add    - POST /maps/:map_id/new
-Delete - POST /maps/:map_id/:marker_id/delete
+Read   - GET  /api/maps/:map_id/markers (JSON data of one maps markers)
+Edit   - POST /api/maps/:map_id/markers/:marker_id(retrieving updated data)
+Add    - POST /api/maps/:map_id/markers (add marker for specific map, returns JSON of the new row)
+Delete - POST /api/maps/:map_id/markers/:marker_id/delete
 
 
 
