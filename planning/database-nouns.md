@@ -2,5 +2,5 @@
 
 - users
 - maps
-- points/locations
+- markers
 
