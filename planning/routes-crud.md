@@ -4,8 +4,8 @@ Users
 
 Browse - ? 
 Read   - GET /users/:user_id (Users can view their profile)
-Edit   - (stretch feature to edit profile) 
-Add    - Register(stretch)
+Edit   - ?
+Add    - ?
 Delete - ? 
 
 Login/Logout
