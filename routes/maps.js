@@ -13,7 +13,7 @@ router.get('/', (req, res) => {
   getAllMaps()
   .then(maps => {
     const templateVars = { maps };
-    res.render('maps', templateVars);
+    res.render('maps_index', templateVars);
   })
 });
 
@@ -29,7 +29,12 @@ router.get('/new', (req, res) => {
 
 // view a single map with the id of map_id
 router.get('/:map_id', (req, res) => {
-  
+  const mapID = req.params.map_id;
+  getSingleMap(mapID)
+  .then (map => {
+    const templateVars = { map };
+    res.render('map', templateVars);
+  })
 });
 
 // edit an existing map with id of map_id
