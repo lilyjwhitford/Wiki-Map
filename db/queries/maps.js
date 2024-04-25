@@ -1,7 +1,17 @@
 const db = require('../connection');
 
 const getAllMaps = () => {
-  return Promise.resolve('aw yeah')
+  const queryString = `SELECT * FROM maps JOIN users owner_id = users.id;`;
+
+  db.query(queryString)
+  .then((results) => {
+    console.log(results);
+    const mapsObj = results.rows;
+    return mapsObj;
+  })
+  .catch((err) => {
+    return err.message
+  })
 };
 
 const getSingleMap = (mapID) => {
@@ -14,7 +24,7 @@ const getSingleMap = (mapID) => {
 
   db.query(queryString, queryParams)
   .then((results) => {
-    let mapObj = results.rows[0];
+    const mapObj = results.rows[0];
     return mapObj;
   })
   .catch((err) => {

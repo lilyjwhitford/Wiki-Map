@@ -11,9 +11,10 @@ const router  = express.Router();
 
 router.get('/', (req, res) => {
   getAllMaps()
-  .then(maps => {
-    const templateVars = { maps };
-    res.render('maps', templateVars);
+  .then(mapsObj => {
+    const templateVars = { mapsObj };
+    console.log("templateVars-----", templateVars);
+    res.render('maps_index', templateVars);
   })
 });
 
