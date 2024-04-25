@@ -1,12 +1,12 @@
 const db = require('../connection');
 
 const getAllMaps = () => {
-  const queryString = `SELECT * FROM maps JOIN users owner_id = users.id;`;
+  const queryString = `SELECT * FROM maps JOIN users ON owner_id = users.id;`;
 
   db.query(queryString)
-  .then((results) => {
-    console.log(results);
+  .then(results => {
     const mapsObj = results.rows;
+    console.log(mapsObj);
     return mapsObj;
   })
   .catch((err) => {
@@ -23,7 +23,7 @@ const getSingleMap = (mapID) => {
   WHERE maps.id = $1;`;
 
   db.query(queryString, queryParams)
-  .then((results) => {
+  .then(results => {
     const mapObj = results.rows[0];
     return mapObj;
   })
