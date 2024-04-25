@@ -13,7 +13,7 @@ router.get('/', (req, res) => {
   getAllMaps()
   .then(maps => {
     const templateVars = { maps };
-    res.render('maps', templateVars);
+    res.render('maps_index', templateVars);
   })
 });
 
