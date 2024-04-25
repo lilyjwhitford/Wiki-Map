@@ -9,5 +9,5 @@ CREATE TABLE markers (
   y_coord INTEGER NOT NULL,
   marker_title VARCHAR(255) NOT NULL,
   marker_description VARCHAR(140) NOT NULL,
-  marker_image VARCHAR(255) NOT NULL,
+  marker_image VARCHAR(255) NOT NULL
 );

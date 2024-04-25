@@ -7,5 +7,5 @@ CREATE TABLE users (
   email VARCHAR(255) NOT NULL, 
   password VARCHAR(255) NOT NULL,
   profile_photo VARCHAR(255) NOT NULL,
-  bio VARCHAR(140) NOT NULL,
+  bio VARCHAR(140) NOT NULL
 );
