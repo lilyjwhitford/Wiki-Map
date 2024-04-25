@@ -7,7 +7,10 @@ const getAllMaps = () => {
 const getSingleMap = (mapID) => {
   const queryParams = [mapID];
   const queryString = `
-  SELECT * FROM maps JOIN users ON owner_id = users.id WHERE maps.id = $1;`;
+  SELECT * 
+  FROM maps 
+  JOIN users ON owner_id = users.id 
+  WHERE maps.id = $1;`;
 
   db.query(queryString, queryParams)
   .then((results) => {
