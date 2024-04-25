@@ -6,13 +6,13 @@
  */
 
 const express = require('express');
-const { getAllMaps } = require('../db/queries/maps');
+const { getAllMaps, getSingleMap } = require('../db/queries/maps');
 const router  = express.Router();
 
 router.get('/', (req, res) => {
   getAllMaps()
-  .then(mapsObj => {
-    const templateVars = { mapsObj };
+  .then(maps => {
+    const templateVars = { maps };
     console.log("templateVars-----", templateVars);
     res.render('maps_index', templateVars);
   })
