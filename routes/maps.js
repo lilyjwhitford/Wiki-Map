@@ -19,7 +19,6 @@ router.get('/', (req, res) => {
 });
 
 // submitting a new map
-// submitting new map on '/'??
 router.post('/', (req, res) => {
 
 });
