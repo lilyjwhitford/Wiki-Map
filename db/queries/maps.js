@@ -5,7 +5,8 @@ const getAllMaps = () => {
 
   db.query(queryString)
   .then((results) => {
-    let mapsObj = results.rows;
+    console.log(results);
+    const mapsObj = results.rows;
     return mapsObj;
   })
   .catch((err) => {
@@ -23,7 +24,7 @@ const getSingleMap = (mapID) => {
 
   db.query(queryString, queryParams)
   .then((results) => {
-    let mapObj = results.rows[0];
+    const mapObj = results.rows[0];
     return mapObj;
   })
   .catch((err) => {
