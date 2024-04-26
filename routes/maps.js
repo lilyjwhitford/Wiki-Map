@@ -19,13 +19,15 @@ router.get('/', (req, res) => {
 });
 
 // submitting a new map
+// submitting new map on '/'??
 router.post('/', (req, res) => {
-  
+
 });
 
 // view form to create a new map
+// route is maps/new
 router.get('/new', (req, res) => {
-  
+  res.render('maps_new', { });
 });
 
 // view a single map with the id of map_id
@@ -40,12 +42,12 @@ router.get('/:map_id', (req, res) => {
 
 // edit an existing map with id of map_id
 router.post('/:map_id', (req, res) => {
-  
+
 });
 
 // delete an existing map with id of map_id
 router.post('/:map_id/delete', (req, res) => {
-  
+
 });
 
 
