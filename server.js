@@ -47,7 +47,7 @@ app.use('/maps', mapRoutes);
 // Separate them into separate routes files (see above).
 
 app.get('/', (req, res) => {
-  res.render('maps_index');
+  res.redirect('/maps');
 });
 
 app.listen(PORT, () => {
