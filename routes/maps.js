@@ -34,7 +34,7 @@ router.get('/new', (req, res) => {
 router.get('/:map_id', (req, res) => {
   const mapID = req.params.map_id;
   getSingleMap(mapID)
-  .then (map => {
+  .then(map => {
     const templateVars = { map };
     res.render('map', templateVars);
   })
