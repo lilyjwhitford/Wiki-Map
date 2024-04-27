@@ -26,21 +26,18 @@
             <li>
               <a href="/new">Create New Map</a>
             </li>
-            <% if (user) { %>
-            <li><%= user %></li>
-            <li>
+            <li></li>
+            <!-- <li>
               <form method="POST" action="/logout">
                 <button type="submit">Logout</button>
               </form>
-            </li>
-            <% } else { %>
+            </li> -->
             <li>
               <a href="/login">Login</a>
             </li>
             <li>
               <a href="/register">Register</a>
             </li>
-            <% } %>
           </ul>
         </div>
       </nav>
