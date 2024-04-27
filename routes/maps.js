@@ -6,15 +6,17 @@
  */
 
 const express = require('express');
-const { getAllMaps } = require('../db/queries/maps');
+const { getAllMaps, getSingleMap } = require('../db/queries/maps');
 const router  = express.Router();
 
 router.get('/', (req, res) => {
   getAllMaps()
-  .then(mapsObj => {
-    const templateVars = { mapsObj };
-    console.log("templateVars-----", templateVars);
+  .then(maps => {
+    const templateVars = { maps };
     res.render('maps_index', templateVars);
+  })
+  .catch((err) => {
+    return err.message;
   })
 });
 
@@ -35,6 +37,9 @@ router.get('/:map_id', (req, res) => {
   .then (map => {
     const templateVars = { map };
     res.render('map', templateVars);
+  })
+  .catch((err) => {
+    return err.message;
   })
 });
 
