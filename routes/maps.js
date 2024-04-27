@@ -13,8 +13,10 @@ router.get('/', (req, res) => {
   getAllMaps()
   .then(maps => {
     const templateVars = { maps };
-    console.log("templateVars-----", templateVars);
     res.render('maps_index', templateVars);
+  })
+  .catch((err) => {
+    return err.message;
   })
 });
 
@@ -35,6 +37,9 @@ router.get('/:map_id', (req, res) => {
   .then (map => {
     const templateVars = { map };
     res.render('map', templateVars);
+  })
+  .catch((err) => {
+    return err.message;
   })
 });
 
