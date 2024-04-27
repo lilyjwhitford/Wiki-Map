@@ -18,6 +18,7 @@
 </head>
 
 <body>
+  <%- include('partials/_header') %>
   <div id="form">
   <form method="POST" action="/maps/new">
     <h2>Create a map</h2>
@@ -41,12 +42,13 @@
     >
 
     <textarea name="text"
-    placeholder="Description">
-    </textarea>
+    placeholder="Description"></textarea>
 
     <input
-    type="file"
-    name="image_file"
+    type="url"
+    name="url_file"
+    placeholder="Image URL"
+
     >
 
     <input type="submit">
