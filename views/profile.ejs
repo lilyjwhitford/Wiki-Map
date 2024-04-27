@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>User Profile</title>
+
+  <meta charset="UTF-8" >
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" >
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" >
+
+
+  <link rel="stylesheet" href="/vendor/normalize-4.1.1.css" />
+  <link rel="stylesheet" href="/vendor/border-box.css" />
+  <link rel="stylesheet" href="/styles/main.css" />
+  <link rel="stylesheet" href="/styles/layout.css" />
+
+  <script src="/vendor/jquery-3.0.0.js"></script>
+  <script defer src="/scripts/app.js"></script>
+</head>
+
+<body>
+  <%- include('partials/_header') %>
+
+  <div class="profile-container">
+    <div class="profile-photo">
+        <img src="<%= user.profile_photo %>" alt="Profile Photo">
+    </div>
+    <div class="profile-info">
+        <h2><%= user.username %></h2>
+        <p><%= user.bio %></p>
+    </div>
+  </div>
+
+  <div class="maps-container">
+    <div class="maps-column">
+        <h3>My Maps</h3>
+        <ul>
+            <!-- <% loop to get each map the user has created { %> -->
+                <li>
+                  <p>list of all of users maps will go here</p>
+                </li>
+        </ul>
+    </div>
+    <div class="maps-favourites-column">
+        <h3>My Favorite Maps</h3>
+        <ul>
+            <!-- <% loop to get each map user has favourited { %> -->
+                <li>
+                  <p>list of all of users favourited maps will go here</p>
+                </li>
+        </ul>
+    </div>
+</div>
+
+</body>
+
+</html>

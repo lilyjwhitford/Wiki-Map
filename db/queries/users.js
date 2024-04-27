@@ -7,4 +7,12 @@ const getUsers = () => {
     });
 };
 
-module.exports = { getUsers };
+const getUserById = (userId) => {
+  return db.query('SELECT * FROM users WHERE id = $1;', [userId])
+  .then(data => {
+    return data.rows[0];
+  });
+};
+
+
+module.exports = { getUsers, getUserById };
