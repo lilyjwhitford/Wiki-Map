@@ -6,5 +6,7 @@ CREATE TABLE maps (
   owner_id INTEGER REFERENCES users(id) ON DELETE CASCADE,
   title VARCHAR(255) NOT NULL,
   description VARCHAR(255) NOT NULL,
-  image_url VARCHAR(255) NOT NULL
+  image_url VARCHAR(255) NOT NULL,
+  lat VARCHAR(255) NOT NULL,
+  long VARCHAR(255) NOT NULL
 );
