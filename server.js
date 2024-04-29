@@ -5,7 +5,7 @@ require('dotenv').config();
 const sassMiddleware = require('./lib/sass-middleware');
 const express = require('express');
 const morgan = require('morgan');
-
+const cookieSession = require('cookie-session');
 const PORT = process.env.PORT || 8080;
 const app = express();
 
@@ -25,6 +25,10 @@ app.use(
   })
 );
 app.use(express.static('public'));
+app.use(cookieSession({
+  name: 'session',
+  keys: ['key1', 'key2', 'key3']
+}));
 
 // Separated Routes for each Resource
 // Note: Feel free to replace the example routes below with your own
@@ -32,6 +36,8 @@ app.use(express.static('public'));
 const markersApiRoutes = require('./routes/markers-api');
 const usersRoutes = require('./routes/users');
 const mapRoutes = require('./routes/maps');
+const loginRoute = require('./routes/login');
+const logoutRoute = require('./routes/logout');
 
 // Mount all resource routes
 // Note: Feel free to replace the example routes below with your own
@@ -40,6 +46,8 @@ const mapRoutes = require('./routes/maps');
 app.use('/api/maps/:map_id/markers', markersApiRoutes);
 app.use('/users', usersRoutes);
 app.use('/maps', mapRoutes);
+app.use('/login', loginRoute);
+app.use('/logout', logoutRoute);
 // Note: mount other resources here, using the same pattern above
 
 // Home page
