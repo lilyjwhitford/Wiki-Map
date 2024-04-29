@@ -7,17 +7,17 @@
 
 const express = require('express');
 const { getAllMaps, getSingleMap } = require('../db/queries/maps');
-const router  = express.Router();
+const router = express.Router();
 
 router.get('/', (req, res) => {
   getAllMaps()
-  .then(maps => {
-    const templateVars = { maps };
-    res.render('maps_index', templateVars);
-  })
-  .catch((err) => {
-    return err.message;
-  })
+    .then(maps => {
+      const templateVars = { maps };
+      res.render('maps_index', templateVars);
+    })
+    .catch((err) => {
+      res.send("maps not found");
+    })
 });
 
 // submitting a new map
@@ -34,20 +34,23 @@ router.get('/new', (req, res) => {
   if (!userId) {
     return res.status(401).send('<html><body><h3>You must be logged in to create a map.</body></html>')
   }
-  res.render('maps_new', { });
+  res.render('maps_new', {});
 });
 
 // view a single map with the id of map_id
 router.get('/:map_id', (req, res) => {
   const mapID = req.params.map_id;
   getSingleMap(mapID)
-  .then(map => {
-    const templateVars = { map };
-    res.render('map', templateVars);
-  })
-  .catch((err) => {
-    return err.message;
-  })
+    .then(map => {
+      if (map) {
+        const templateVars = { map, mapData: { lat: map.lat, long: map.long, zoom: 13, markers: [] } };
+        return res.render('map', templateVars);
+      }
+      return res.send("map not found");
+    })
+    .catch((err) => {
+      return res.send(err.message);
+    })
 });
 
 // edit an existing map with id of map_id
@@ -59,7 +62,5 @@ router.post('/:map_id', (req, res) => {
 router.post('/:map_id/delete', (req, res) => {
 
 });
-
-
 
 module.exports = router;
