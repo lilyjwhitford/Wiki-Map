@@ -2,7 +2,10 @@ const express = require('express');
 const router = express.Router();
 
 router.post('', (req, res) => {
-  req.session = null;
+  // clear user_id cookie
+  res.clearCookie("user_id");
+
+  // redirect back to homepage
   res.redirect('/');
 });
 

@@ -3,10 +3,10 @@ const router = express.Router();
 
 
 router.get('/:id', (req, res) => {
-  // using encrypted cookies
-  req.session.user_id = req.params.id;
+  // set a cookie as a string value
+  res.cookie('user_id', req.params.id);
 
-  // send the user somewhere
+  // redirect to homepage
   res.redirect('/');
 });
 
