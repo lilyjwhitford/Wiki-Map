@@ -6,17 +6,18 @@
  */
 
 const express = require('express');
-const router  = express.Router();
-const db = require('../db/connection');
+const router = express.Router();
+const { getMarkers, addMarker, deleteMarker, editMarker } = require('../db/queries/markers');
 
-// get a JSON of all the markers
+// any routes will come AFTER /api/maps/:map_id/markers/
+
+// get a JSON/fetch marker for a specific map
 router.get('/', (req, res) => {
-  const query = `SELECT * FROM widgets`;
-  console.log(query);
-  db.query(query)
-    .then(data => {
-      const widgets = data.rows;
-      res.json({ widgets });
+  const map_id = req.params.map_id;
+
+  getMarkers(map_id)
+    .then(markers => {
+      res.json({ markers });
     })
     .catch(err => {
       res
@@ -25,19 +26,51 @@ router.get('/', (req, res) => {
     });
 });
 
-// Editing a marker
-router.post('/:markers_id', (req, res) => {
- 
+// edit a marker
+router.post('/:marker_id', (req, res) => {
+  // const markerID =
+  // const updatedMarker = req.body ?
+
+  editMarker(markerID, updatedMarker)
+    .then(marker => {
+      res.json({ marker });
+    })
+    .catch(err => {
+      res
+        .status(500)
+        .json({ error: err.message });
+    });
 });
 
-// Add a marker
+// add a marker to a specific map
 router.post('/', (req, res) => {
- 
+  const markerData = req.body;
+
+  markerData.map_id = req.params.map_id; // include map_id in req body?
+  addMarker(markerData)
+    .then(marker => {
+      res.json({ marker });
+    })
+    .catch(err => {
+      res
+        .status(500)
+        .json({ error: err.message });
+    });
 });
 
-// Delete a marker
-router.post('/delete', (req, res) => {
- 
+// delete a marker form a specific map
+router.post(':marker_id/delete', (req, res) => {
+  const markerID = req.body.id;
+
+  deleteMarker(markerID)
+    .then(marker => {
+      res.json({ marker });
+    })
+    .catch(err => {
+      res
+        .status(500)
+        .json({ error: err.message });
+    });
 });
 
 
