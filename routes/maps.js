@@ -28,6 +28,10 @@ router.post('/', (req, res) => {
 // view form to create a new map
 // route is maps/new
 router.get('/new', (req, res) => {
+  userId = req.cookies.user_id;
+  if (!userId) {
+    return res.status(401).send('<html><body><h3>You must be logged in to create a map.</body></html>')
+  }
   res.render('maps_new', { });
 });
 
