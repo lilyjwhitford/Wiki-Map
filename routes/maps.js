@@ -28,7 +28,9 @@ router.post('/', (req, res) => {
 // view form to create a new map
 // route is maps/new
 router.get('/new', (req, res) => {
-  userId = req.cookies.user_id;
+  // assign userId to the current session cookie
+  const userId = req.cookies.user_id;
+  // if there isnt a session cookie return 401
   if (!userId) {
     return res.status(401).send('<html><body><h3>You must be logged in to create a map.</body></html>')
   }
