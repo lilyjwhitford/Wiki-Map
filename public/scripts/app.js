@@ -1,10 +1,10 @@
 // Client facing scripts here
 $(document).ready(() => {
-  // add a map
-  let lat = 49.2838;
-  let long = -123.1193;
-  let zoom = 13;
 
+})
+
+const loadMap = (paramsObj) => {
+  const { lat, long, zoom } = paramsObj;
   let map = L.map('map').setView([lat, long], zoom);
   L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
     maxZoom: 19,
@@ -16,6 +16,4 @@ $(document).ready(() => {
 
   // add a pop-up to the marker
   marker.bindPopup("<b>Marker Title</b><br><img><br><button></button><button></button>").openPopup();
-
-
-})
+};
