@@ -32,7 +32,7 @@ router.get('/new', (req, res) => {
   const userId = req.cookies.user_id;
   // if there isnt a session cookie return 401
   if (!userId) {
-    return res.status(401).send('<html><body><h3>You must be logged in to create a map.</body></html>')
+    return res.status(401).send('<html><body><h3>You must be logged in to create a map.</body></html>');
   }
   res.render('maps_new', { });
 });
