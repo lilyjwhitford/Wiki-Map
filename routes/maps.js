@@ -6,8 +6,8 @@
  */
 
 const express = require('express');
-const { getAllMaps, getSingleMap } = require('../db/queries/maps');
-const router = express.Router();
+const { getAllMaps, getSingleMap, createMap } = require('../db/queries/maps');
+const router  = express.Router();
 
 router.get('/', (req, res) => {
   getAllMaps()
