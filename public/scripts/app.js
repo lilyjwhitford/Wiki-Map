@@ -1,19 +1,24 @@
 // Client facing scripts here
-$(document).ready(() => {
+// $(document).ready(() => {
 
-})
+// })
 
 const loadMap = (paramsObj) => {
-  const { lat, long, zoom } = paramsObj;
+  const { lat, long, zoom, markers } = paramsObj;
+  console.log('paramsObj -------', paramsObj);
   let map = L.map('map').setView([lat, long], zoom);
   L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
     maxZoom: 19,
     attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
   }).addTo(map);
 
-  // add a marker
-  let marker = L.marker([49.2838, -123.1193]).addTo(map);
-
-  // add a pop-up to the marker
-  marker.bindPopup("<b>Marker Title</b><br><img><br><button></button><button></button>").openPopup();
+  // make loop to add marker to the map
+  markers.forEach(data => {
+    console.log('data --------', data);
+    // add a marker
+    let marker = L.marker([data.lat, data.long]).addTo(map);
+    // add a pop-up to the marker
+    marker.bindPopup(`<b>${data.title}</b><br><img src="${data.image_url}" alt="Marker Image">`).openPopup();
+  });
+  return map;
 };
