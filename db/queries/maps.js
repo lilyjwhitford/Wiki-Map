@@ -31,4 +31,22 @@ const getSingleMap = (mapID) => {
   }
 )};
 
-module.exports = { getAllMaps, getSingleMap };
+const createMap = (option) => {
+  // deconstruct the parameter
+  const  { owner_id, title, lat, long, description, image_url } = option;
+
+  return db.query(`
+  INSERT INTO maps (owner_id, title, lat, long, description, image_url) VALUES
+  ($1, $2, $3, $4, $5, $6) RETURNING *;
+  `, [owner_id, title, lat, long, description, image_url])
+  .then(result => {
+    console.log('createMap Results: ', result);
+    return result.rows[0];
+  })
+  .catch(err => {
+    console.log(err.message);
+    throw new Error('Failed to create new map');
+  })
+};
+
+module.exports = { getAllMaps, getSingleMap, createMap };

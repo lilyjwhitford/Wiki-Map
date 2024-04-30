@@ -6,7 +6,8 @@
  */
 
 const express = require('express');
-const { getAllMaps, getSingleMap } = require('../db/queries/maps');
+const { getAllMaps, getSingleMap, createMap } = require('../db/queries/maps');
+const db = require('../db/connection');
 const router  = express.Router();
 
 router.get('/', (req, res) => {
@@ -22,6 +23,26 @@ router.get('/', (req, res) => {
 
 // submitting a new map
 router.post('/', (req, res) => {
+
+});
+
+router.post('/new', (req, res) => {
+  const userId = req.cookies.user_id;
+  if (!userId) {
+    return res.status(401).send('<html><body><h3>You must be logged in to create a map.</body></html>');
+  }
+  const newMap = req.body;
+  newMap.owner_id = userId;
+
+  createMap(newMap)
+  .then(map => {
+    console.log(map);
+    res.redirect(`/maps/${map.id}`);
+  })
+  .catch(err => {
+     console.error(err);
+     res.status(500).send('Failed to create a map');
+  })
 
 });
 
