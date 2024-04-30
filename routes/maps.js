@@ -7,7 +7,6 @@
 
 const express = require('express');
 const { getAllMaps, getSingleMap, createMap } = require('../db/queries/maps');
-const db = require('../db/connection');
 const router  = express.Router();
 
 router.get('/', (req, res) => {
