@@ -25,6 +25,26 @@ router.post('/', (req, res) => {
 
 });
 
+router.post('/new', (req, res) => {
+  const userId = req.cookies.user_id;
+  if (!userId) {
+    return res.status(401).send('<html><body><h3>You must be logged in to create a map.</body></html>');
+  }
+  const newMap = req.body;
+  newMap.owner_id = userId;
+
+  createMap(newMap)
+  .then(map => {
+    console.log(map);
+    res.redirect(`/maps/${map.id}`);
+  })
+  .catch(err => {
+     console.error(err);
+     res.status(500).send('Failed to create a map');
+  })
+
+});
+
 // view form to create a new map
 // route is maps/new
 router.get('/new', (req, res) => {
@@ -32,7 +52,7 @@ router.get('/new', (req, res) => {
   const userId = req.cookies.user_id;
   // if there isnt a session cookie return 401
   if (!userId) {
-    return res.status(401).send('<html><body><h3>You must be logged in to create a map.</body></html>')
+    return res.status(401).send('<html><body><h3>You must be logged in to create a map.</body></html>');
   }
   res.render('maps_new', {});
 });
