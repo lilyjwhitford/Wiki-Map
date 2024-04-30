@@ -16,10 +16,12 @@ const getAllMaps = () => {
 const getSingleMap = (mapID) => {
   const queryParams = [mapID];
   const queryString = `
-  SELECT *
+  SELECT maps.*, ARRAY_AGG(markers.title || ' ' || markers.lat || ' ' || markers.long || ' ' || markers.description || ' ' || markers.image_url) markers
   FROM maps
-  JOIN users ON owner_id = users.id
-  WHERE maps.id = $1;`;
+  JOIN markers ON maps.id = map_id
+  JOIN users ON creator_id = users.id
+  GROUP BY maps.title, maps.id
+  HAVING maps.id = $1;`;
 
   return db.query(queryString, queryParams)
     .then(results => {
@@ -32,6 +34,20 @@ const getSingleMap = (mapID) => {
     }
     )
 };
+
+// SELECT maps.*, json_object_agg('title', markers.title, 'lat', markers.lat, 'long', markers.long, 'desc', markers.description, 'img', markers.image_url) markers
+// FROM maps
+// JOIN markers ON maps.id = map_id
+// JOIN users ON creator_id = users.id
+// GROUP BY maps.title, maps.id
+// HAVING maps.id = 1;
+
+// SELECT maps.*, json_object_agg('title', markers.title) markers
+// FROM maps
+// JOIN markers ON maps.id = map_id
+// JOIN users ON creator_id = users.id
+// GROUP BY maps.title, maps.id
+// HAVING maps.id = 1;
 
 const createMap = (option) => {
   // deconstruct the parameter
