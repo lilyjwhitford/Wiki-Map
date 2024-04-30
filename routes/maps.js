@@ -63,7 +63,9 @@ router.get('/:map_id', (req, res) => {
   getSingleMap(mapID)
     .then(map => {
       if (map) {
-        const templateVars = { map, mapData: { lat: map.lat, long: map.long, zoom: 13, markers: [] } };
+        console.log("map----", map)
+        const templateVars = { map, mapData: { lat: map.lat, long: map.long, zoom: 13, markers: map.markers } };
+        console.log("templateVars------", templateVars);
         return res.render('map', templateVars);
       }
       return res.send("map not found");
