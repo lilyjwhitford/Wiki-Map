@@ -22,7 +22,7 @@ const editMarker = (markerID, updatedMarker) => {
     UPDATE markers
     SET lat = $1, long = $2, title = $3, description = $4, image_url = $5
     WHERE id = $6
-    RETURNING id
+    RETURNING *
     ;`;
 
   return db.query(queryString, queryParams)
@@ -41,7 +41,7 @@ const addMarker = (markerData) => {
   const queryString = `
     INSERT INTO markers (creator_id, map_id, lat, long, title, description, image_url)
     VALUES ($1, $2, $3, $4, $5, $6, $7)
-    RETURNING id
+    RETURNING *
     ;`;
 
   return db.query(queryString, queryParams)
