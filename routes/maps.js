@@ -66,11 +66,12 @@ router.get("/new", (req, res) => {
 // view a single map with the id of map_id
 router.get("/:map_id", (req, res) => {
   const mapID = req.params.map_id;
+  const userID = req.cookies.user_id;
   getSingleMap(mapID)
     .then((map) => {
       if (map) {
         console.log("map----", map)
-        const templateVars = { map, mapData: { lat: map.lat, long: map.long, zoom: 11, markers: map.markers } };
+        const templateVars = { map, mapData: { lat: map.lat, long: map.long, zoom: 11, markers: map.markers, userID, mapID } };
         console.log("templateVars------", templateVars);
         return res.render("map", templateVars);
       }

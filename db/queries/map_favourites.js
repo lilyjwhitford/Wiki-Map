@@ -4,11 +4,11 @@ const addFavourite = option => {
   const { user_id, map_id } = option;
 
   return db.query(`
-  INSERT INTO map_favourite (user_id, map_id) VALUES
+  INSERT INTO map_favourites (user_id, map_id) VALUES
   ($1, $2) RETURNING *
   ;`, [user_id, map_id])
   .then(result => {
-    console.log('addFavourite Result: ',result);
+    console.log('addFavourite Result: ', result);
     return result.rows[0];
   })
   .catch(err => {
@@ -30,4 +30,17 @@ const deleteFavourite = mapId => {
   });
 };
 
-module.exports = { addFavourite, deleteFavourite };
+const checkFavouriteMap = (mapID, userID) => {
+  return db.query(`
+  SELECT * FROM map_favourites WHERE map_id = $1 AND user_id = $2
+  `, [mapID, userID])
+  .then(result => {
+    if (result.rows.length === 0) {
+      return false;
+    } else {
+      return true;
+    }
+  });
+};
+
+module.exports = { addFavourite, deleteFavourite, checkFavouriteMap };

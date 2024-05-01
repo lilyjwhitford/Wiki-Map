@@ -9,9 +9,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" >
 
   <!-- jQuery library -->
-  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+  <!-- <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> -->
   <!-- Add jQuery route -->
-  <!-- <script src="../public/scripts/client.js"></script> -->
+  <!-- <script type="text/javascript" src="../public/scripts/client.js"></script> -->
 
   <!-- Font Awesome -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
@@ -43,6 +44,20 @@
     $(document).ready(() => {
       const data = <%- JSON.stringify(mapData) %>;
       currentMap = loadMap(data);
+
+      $('#map-container i').on('click', () => {
+        const mapID = data.mapID;
+        const userID = data.userID;
+        console.log('Map ID: ', mapID, 'User ID: ', userID);
+        if (!userID) {
+          console.log('Need to be logged in to favourite');
+          return false;
+        }
+        if (checkFavouriteMap(mapID, userID)) {
+          console.log('Success')
+        
+        }
+      })
    })
    </script>
 
