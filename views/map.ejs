@@ -45,6 +45,59 @@
       currentMap = loadMap(data);
    })
    </script>
+
+<h2>Add a new marker!</h1>
+   <div>
+    <form id="add-marker-form" action="/" method="POST">
+     <div>
+      <label for="lat">Latitude:</label>
+      <input
+      class="marker-lat"
+      type="text"
+      name="lat"
+    />
+     </div>
+
+      <div>
+       <label for="long">Longitude:</label>
+       <input
+       class="marker-long"
+       type="text"
+       name="long"
+     />
+      </div>
+
+      <div>
+        <label for="title">Title:</label>
+        <input
+        class="marker-title"
+        type="text"
+        name="title"
+      />
+       </div>
+
+       <div>
+        <label for="description">Description:</label>
+        <input
+        class="marker-description"
+        type="text"
+        name="description"
+      />
+       </div>
+
+       <div>
+        <label for="image_url">Image URL:</label>
+        <input
+        class="marker-image-url"
+        type="text"
+        name="image_url"
+      />
+       </div>
+
+       <button type="submit">Add Marker</button>
+
+    </form>
+
 </body>
 
 </html>
