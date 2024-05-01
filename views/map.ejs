@@ -33,17 +33,10 @@
   </div>
 
   </div>
-  <script>
-    let currentMap;
-    $(document).ready(() => {
-      const data = <%- JSON.stringify(mapData) %>;
-      currentMap = loadMap(data);
-   })
-   </script>
 
 <h2>Add a new marker!</h1>
    <div>
-    <form id="add-marker-form" action="/" method="POST">
+    <form id="add-marker-form" action="/:map_id/markers" method="POST">
      <div>
       <label for="lat">Latitude:</label>
       <input
@@ -94,6 +87,14 @@
     </form>
 
 </body>
+
+<script>
+  let currentMap;
+  $(document).ready(() => {
+    const data = <%- JSON.stringify(mapData) %>;
+    currentMap = loadMap(data);
+ })
+ </script>
 
 </html>
 
