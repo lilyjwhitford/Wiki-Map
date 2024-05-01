@@ -17,7 +17,7 @@ router.get('/', (req, res) => {
 
   getMarkers(map_id)
     .then(markers => {
-      res.json({ markers });
+      res.json({ markers })
     })
     .catch(err => {
       res
@@ -28,12 +28,12 @@ router.get('/', (req, res) => {
 
 // edit a marker
 router.post('/:marker_id', (req, res) => {
-  // const markerID =
-  // const updatedMarker = req.body ?
+  const markerID = req.params.markerID;
+  const updatedMarker = req.body;
 
   editMarker(markerID, updatedMarker)
     .then(marker => {
-      res.json({ marker });
+      res.json({ marker })
     })
     .catch(err => {
       res
@@ -45,11 +45,11 @@ router.post('/:marker_id', (req, res) => {
 // add a marker to a specific map
 router.post('/', (req, res) => {
   const markerData = req.body;
-
   markerData.map_id = req.params.map_id; // include map_id in req body?
+
   addMarker(markerData)
     .then(marker => {
-      res.json({ marker });
+      res.json({ marker })
     })
     .catch(err => {
       res
@@ -64,7 +64,7 @@ router.post(':marker_id/delete', (req, res) => {
 
   deleteMarker(markerID)
     .then(marker => {
-      res.json({ marker });
+      res.json({ marker })
     })
     .catch(err => {
       res
