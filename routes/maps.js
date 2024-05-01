@@ -7,7 +7,7 @@
 
 const express = require('express');
 const { getAllMaps, getSingleMap, createMap } = require('../db/queries/maps');
-const router  = express.Router();
+const router = express.Router();
 
 router.get('/', (req, res) => {
   getAllMaps()
@@ -34,14 +34,14 @@ router.post('/new', (req, res) => {
   newMap.owner_id = userId;
 
   createMap(newMap)
-  .then(map => {
-    console.log(map);
-    res.redirect(`/maps/${map.id}`);
-  })
-  .catch(err => {
-     console.error(err);
-     res.status(500).send('Failed to create a map');
-  })
+    .then(map => {
+      console.log(map);
+      res.redirect(`/maps/${map.id}`);
+    })
+    .catch(err => {
+      console.error(err);
+      res.status(500).send('Failed to create a map');
+    })
 
 });
 
@@ -64,7 +64,7 @@ router.get('/:map_id', (req, res) => {
     .then(map => {
       if (map) {
         console.log("map----", map)
-        const templateVars = { map, mapData: { lat: map.lat, long: map.long, zoom: 13, markers: map.markers } };
+        const templateVars = { map, mapData: { lat: map.lat, long: map.long, zoom: 11, markers: map.markers } };
         console.log("templateVars------", templateVars);
         return res.render('map', templateVars);
       }

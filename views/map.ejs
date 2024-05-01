@@ -34,9 +34,10 @@
   </div>
 
   <script>
+    let currentMap;
     $(document).ready(() => {
       const data = <%- JSON.stringify(mapData) %>;
-      loadMap(data);
+      currentMap = loadMap(data);
    })
    </script>
 </body>
