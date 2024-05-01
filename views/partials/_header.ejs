@@ -6,41 +6,59 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
     <title>Wiki-Map</title>
+
     <!-- CSS -->
     <link rel="stylesheet" href="/vendor/normalize-4.1.1.css" />
     <link rel="stylesheet" href="/vendor/border-box.css" />
     <link rel="stylesheet" href="/styles/main.css" />
     <link rel="stylesheet" href="/styles/layout.css" />
+    <link rel="stylesheet" href="/styles/_header.css" />
 
     <!-- JS -->
     <script src="/vendor/jquery-3.0.0.js"></script>
     <script defer src="/scripts/app.js"></script>
+    <script src="/routes/login.js"></script>
+    <script src="/routes/logout.js"></script>
+    <script src="/scripts/index.js" defer></script>
   </head>
-
   <body>
     <header>
+      <h1 id="website-title">WIKI-MAPS</h1>
       <nav>
-        <a href="/maps">Wiki-Map</a>
-        <button id="toggleButton">Toggle Navigation</button>
-        <div id="navMenu">
-          <ul>
-            <li>
-              <a href="/maps/new">Create New Map</a>
-            </li>
-            <li></li>
-            <li>
-              <form method="POST" action="/logout">
-                <button type="submit">Logout</button>
-              </form>
-            </li>
-            <li>
-              <a href="/login">Login</a>
-            </li>
-            <li>
-              <a href="/register">Register</a>
-            </li>
-          </ul>
+
+        <ul class="logged-in">
+          <!-- <a href="/new">Create New Map</a> -->
+          <a href="/logout">Logout</a>
+        </ul>
+        <div class="dropdown" data-dropdown>
+          <button class="link" data-dropdown-button>Menu</button>
+          <div class="dropdown-menu info">
+            <div>
+              <div class="dropdown-heading"></div>
+              <div class="dropdown-links">
+                <a href="/new">Create New Map</a>
+              </div>
+            </div>
+            <div>
+              <div class="dropdown-heading"></div>
+              <div class="dropdown-links">
+                <a href="/favorites">Favourites</a>
+              </div>
+            </div>
+            <div>
+              <div class="dropdown-heading"></div>
+              <div class="dropdown-links">
+                <a href="/profile">Profile</a>
+              </div>
+            </div>
+          </div>
         </div>
+
+        <ul class="logged-out">
+          <a href="/login">Login</a></li>
+          <a href="/register">Register</a>
+        </ul>
+
       </nav>
     </header>
   </body>
