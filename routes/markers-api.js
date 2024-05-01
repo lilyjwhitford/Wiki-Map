@@ -43,7 +43,7 @@ router.post('/:marker_id', (req, res) => {
 });
 
 // add a marker to a specific map
-router.post('/', (req, res) => {
+router.post('/:map_id/markers', (req, res) => {
   const markerData = req.body;
   markerData.map_id = req.params.map_id; // include map_id in req body?
 
