@@ -91,22 +91,31 @@
 <script>
   let currentMap;
   $(document).ready(() => {
+    // stringify the map and markers data pulled from database
     const data = <%- JSON.stringify(mapData) %>;
+    // load map and marker data from database to the map
     currentMap = loadMap(data);
     console.log('current map -----', currentMap);
 
+    // when the 'Add marker' form is submitted
     $('#add-marker-form').on("submit", function (e) {
+      // prevent redirection
       e.preventDefault();
+      // serialize form data
       let formData = $(this).serialize();
       console.log(formData);
+      // post request to add the new marker data to the database
       $.ajax({
         method: "POST",
         url: "/api/maps/<%= map.id %>/markers",
         data: formData,
         success: function(response) {
+          // load new marker into map 
           $.get("/api/maps/<%= map.id %>")
           .then(mapDataResponse => {
+            //remove current map on page
             currentMap.remove();
+            //add all markers, including the new marker, to the map
             loadMap(mapDataResponse);
           })
         }
