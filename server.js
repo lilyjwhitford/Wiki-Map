@@ -40,7 +40,7 @@ const logoutRoute = require('./routes/logout');
 // Note: Feel free to replace the example routes below with your own
 // Note: Endpoints that return data (eg. JSON) usually start with `/api`
 // app.use('/api/users', userApiRoutes);
-app.use('/api/maps/:map_id/markers', markersApiRoutes);
+app.use('/api/maps', markersApiRoutes);
 app.use('/users', usersRoutes);
 app.use('/maps', mapRoutes);
 app.use('/login', loginRoute);
