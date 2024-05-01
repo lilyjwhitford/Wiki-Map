@@ -29,3 +29,5 @@ const deleteFavourite = mapId => {
     throw new Error('Could not delete map');
   });
 };
+
+module.exports = { addFavourite, deleteFavourite };
