@@ -16,17 +16,28 @@ const getAllMaps = () => {
 const getSingleMap = (mapID) => {
   const queryParams = [mapID];
   const queryString = `
-  SELECT maps.*, json_agg(markers) as markers
+  SELECT maps.*
   FROM maps
-  JOIN markers ON maps.id = markers.map_id
-  JOIN users ON creator_id = users.id
   WHERE maps.id = $1
-  GROUP BY maps.id;`;
+  GROUP BY maps.id`;
 
-  return db.query(queryString, queryParams)
+  const markerQueryString = `
+  SELECT markers.*
+  FROM markers
+  JOIN maps ON maps.id = markers.map_id
+  WHERE maps.id = $1
+  GROUP BY markers.id;`;
+
+  const mapQuery = db.query(queryString, queryParams);
+  const markerQuery = db.query(markerQueryString, queryParams);
+
+  const promiseArray = [mapQuery, markerQuery];
+
+  return Promise.all(promiseArray)
     .then(results => {
-      console.log(results);
-      const mapObj = results.rows[0];
+      const map = results[0].rows[0];
+      const markers = results[1].rows;
+      const mapObj = { ...map, markers }
       return mapObj;
     })
     .catch((err) => {

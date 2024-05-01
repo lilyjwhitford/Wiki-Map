@@ -8,6 +8,7 @@
 const express = require('express');
 const router = express.Router();
 const { getMarkers, addMarker, deleteMarker, editMarker } = require('../db/queries/markers');
+const { getSingleMap } = require('../db/queries/maps');
 
 // any routes will come AFTER /api/maps/:map_id/markers/
 
@@ -59,7 +60,7 @@ router.post('/:map_id/markers', (req, res) => {
 });
 
 // delete a marker form a specific map
-router.post(':marker_id/delete', (req, res) => {
+router.post('/:marker_id/delete', (req, res) => {
   const markerID = req.body.id;
 
   deleteMarker(markerID)
@@ -72,6 +73,23 @@ router.post(':marker_id/delete', (req, res) => {
         .json({ error: err.message });
     });
 });
+
+router.get('/:map_id', (req, res) => {
+  const mapID = req.params.map_id;
+  getSingleMap(mapID)
+    .then((map) => {
+      if (map) {
+        console.log("map----", map)
+        const templateVars = { lat: map.lat, long: map.long, zoom: 11, markers: map.markers };
+        console.log("templateVars------", templateVars);
+        return res.send(templateVars);
+      }
+      return res.send("map not found");
+    })
+    .catch((err) => {
+      return res.send(err.message);
+    });
+})
 
 
 module.exports = router;

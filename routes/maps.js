@@ -21,7 +21,7 @@ router.get("/", (req, res) => {
 });
 
 // submitting a new map
-router.post("/", (req, res) => {});
+router.post("/", (req, res) => { });
 
 router.post("/new", (req, res) => {
   const userId = req.cookies.user_id;
@@ -81,11 +81,12 @@ router.get("/:map_id", (req, res) => {
     });
 });
 
+
 // edit an existing map with id of map_id
-router.post("/:map_id", (req, res) => {});
+router.post("/:map_id", (req, res) => { });
 
 // delete an existing map with id of map_id
-router.post("/:map_id/delete", (req, res) => {});
+router.post("/:map_id/delete", (req, res) => { });
 
 // check cookie to view maps
 router.get("/maps", (req, res) => {
