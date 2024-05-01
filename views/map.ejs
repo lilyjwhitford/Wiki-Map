@@ -36,7 +36,7 @@
 
 <h2>Add a new marker!</h1>
    <div>
-    <form id="add-marker-form" action="/:map_id/markers" method="POST">
+    <form id="add-marker-form" action="/api/maps/<%= map.id %>/markers" method="POST">
      <div>
       <label for="lat">Latitude:</label>
       <input
@@ -93,7 +93,28 @@
   $(document).ready(() => {
     const data = <%- JSON.stringify(mapData) %>;
     currentMap = loadMap(data);
+    console.log('current map -----', currentMap);
+
+    $('#add-marker-form').on("submit", function (e) {
+      e.preventDefault();
+      let formData = $(this).serialize();
+      console.log(formData);
+      $.ajax({
+        method: "POST",
+        url: "/api/maps/<%= map.id %>/markers",
+        data: formData,
+        success: function(response) {
+          $.get("/api/maps/<%= map.id %>")
+          .then(mapDataResponse => {
+            currentMap.remove();
+            loadMap(mapDataResponse);
+          })
+        }
+      })
+    })
  })
+
+
  </script>
 
 </html>
