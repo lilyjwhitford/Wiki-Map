@@ -64,7 +64,7 @@ router.get('/:map_id', (req, res) => {
     .then(map => {
       if (map) {
         console.log("map----", map)
-        const templateVars = { map, mapData: { lat: map.lat, long: map.long, zoom: 13, markers: map.markers } };
+        const templateVars = { map, mapData: { lat: map.lat, long: map.long, zoom: 11, markers: map.markers } };
         console.log("templateVars------", templateVars);
         return res.render('map', templateVars);
       }
