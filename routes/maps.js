@@ -5,8 +5,8 @@
  * See: https://expressjs.com/en/guide/using-middleware.html#middleware.router
  */
 
-const express = require("express");
-const { getAllMaps, getSingleMap, createMap } = require("../db/queries/maps");
+const express = require('express');
+const { getAllMaps, getSingleMap, createMap } = require('../db/queries/maps');
 const router = express.Router();
 
 router.get("/", (req, res) => {
@@ -36,14 +36,15 @@ router.post("/new", (req, res) => {
   newMap.owner_id = userId;
 
   createMap(newMap)
-    .then((map) => {
+    .then(map => {
       console.log(map);
       res.redirect(`/maps/${map.id}`);
     })
-    .catch((err) => {
+    .catch(err => {
       console.error(err);
-      res.status(500).send("Failed to create a map");
-    });
+      res.status(500).send('Failed to create a map');
+    })
+
 });
 
 // view form to create a new map
@@ -68,16 +69,8 @@ router.get("/:map_id", (req, res) => {
   getSingleMap(mapID)
     .then((map) => {
       if (map) {
-        console.log("map----", map);
-        const templateVars = {
-          map,
-          mapData: {
-            lat: map.lat,
-            long: map.long,
-            zoom: 13,
-            markers: map.markers,
-          },
-        };
+        console.log("map----", map)
+        const templateVars = { map, mapData: { lat: map.lat, long: map.long, zoom: 11, markers: map.markers } };
         console.log("templateVars------", templateVars);
         return res.render("map", templateVars);
       }
