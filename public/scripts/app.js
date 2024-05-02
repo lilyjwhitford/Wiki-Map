@@ -18,7 +18,12 @@ const loadMap = (paramsObj) => {
     // add a marker
     let marker = L.marker([data.lat, data.long]).addTo(map);
     // add a pop-up to the marker
-    marker.bindPopup(`<b>${data.title}</b><br><img src="${data.image_url}" alt="Marker Image">`).openPopup();
+    marker.bindPopup(`
+    <b>${data.title}</b>
+    <br><img src="${data.image_url}" alt="Marker Image">
+    <p>${data.description}</p>
+    <button id="edit-marker-btn" class="btn btn-primary">Edit</button>
+    <button id="delete-marker-btn" class="btn btn-danger">Delete</button>`).openPopup();
   });
   return map;
 };
