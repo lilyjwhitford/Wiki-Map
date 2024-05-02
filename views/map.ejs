@@ -110,7 +110,7 @@
         url: "/api/maps/<%= map.id %>/markers",
         data: formData,
         success: function(response) {
-          // load new marker into map 
+          // load new marker into map
           $.get("/api/maps/<%= map.id %>")
           .then(mapDataResponse => {
             //remove current map on page
