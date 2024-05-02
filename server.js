@@ -31,6 +31,7 @@ app.use(cookieParser());
 // Note: Feel free to replace the example routes below with your own
 // const userApiRoutes = require('./routes/users-api');
 const markersApiRoutes = require('./routes/markers-api');
+const favouriteApiRoutes = require('./routes/map_favourites-api');
 const usersRoutes = require('./routes/users');
 const mapRoutes = require('./routes/maps');
 const loginRoute = require('./routes/login');
@@ -41,6 +42,7 @@ const logoutRoute = require('./routes/logout');
 // Note: Endpoints that return data (eg. JSON) usually start with `/api`
 // app.use('/api/users', userApiRoutes);
 app.use('/api/maps', markersApiRoutes);
+app.use('/api/maps/favourite', favouriteApiRoutes);
 app.use('/users', usersRoutes);
 app.use('/maps', mapRoutes);
 app.use('/login', loginRoute);

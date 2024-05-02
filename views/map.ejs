@@ -9,7 +9,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" >
 
   <!-- jQuery library -->
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+  <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script> -->
   <!-- <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> -->
   <!-- Add jQuery route -->
   <!-- <script type="text/javascript" src="../public/scripts/client.js"></script> -->
@@ -126,6 +126,29 @@
         }
       })
     })
+
+    $('#map-container i').on('click', (event) => {
+        const mapID = data.mapID;
+        const userID = data.userID;
+        console.log('Map ID: ', mapID, 'User ID: ', userID);
+        if (!userID) {
+          console.log('Need to be logged in to favourite');
+          event.preventDefault();
+          return;
+        }
+        // adds a map to map_favourites
+        $.ajax({
+          method: "POST",
+          url: `/api/maps/favourite/${mapID}`,
+          success: function(data) {
+            console.log('Favourited successfully', data);
+          },
+          error: function(xhr, status, error) {
+            console.error('Error favouriting map: ', error);
+          }
+        })
+      })
+
  })
 
 

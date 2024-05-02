@@ -1,12 +1,10 @@
 const db = require('../connection');
 
-const addFavourite = option => {
-  const { user_id, map_id } = option;
-
+const addFavourite = (map_id, user_id) => {
   return db.query(`
   INSERT INTO map_favourites (user_id, map_id) VALUES
   ($1, $2) RETURNING *
-  ;`, [user_id, map_id])
+  ;`, [map_id, user_id])
   .then(result => {
     console.log('addFavourite Result: ', result);
     return result.rows[0];
@@ -17,12 +15,12 @@ const addFavourite = option => {
   });
 };
 
-const deleteFavourite = mapId => {
+const deleteFavourite = (map_id, user_id) => {
   return db.query(`
-  DELETE FROM map_favourites WHERE map_id = $1
-  ;`, [mapId])
+  DELETE FROM map_favourites WHERE map_id = $1 AND user_id = $2
+  ;`, [map_id, user_id])
   .then(result => {
-    console.log('Succesfully deleted');
+    return result.rows[0];
   })
   .catch(err => {
     console.error(err);
@@ -30,17 +28,29 @@ const deleteFavourite = mapId => {
   });
 };
 
-const checkFavouriteMap = (mapID, userID) => {
+const getFavouriteMaps = (map_id, user_id) => {
   return db.query(`
   SELECT * FROM map_favourites WHERE map_id = $1 AND user_id = $2
-  `, [mapID, userID])
+  `, [map_id, user_id])
   .then(result => {
-    if (result.rows.length === 0) {
-      return false;
-    } else {
-      return true;
-    }
+    return result.rows;
+  })
+  .catch(err => {
+    throw new Error('Could not retrieve map');
   });
 };
 
-module.exports = { addFavourite, deleteFavourite, checkFavouriteMap };
+// const checkFavouriteMap = (mapID, userID) => {
+//   return db.query(`
+//   SELECT * FROM map_favourites WHERE map_id = $1 AND user_id = $2
+//   `, [mapID, userID])
+//   .then(result => {
+  //     if (result.rows.length === 0) {
+//       return false;
+//     } else {
+//       return true;
+//     }
+//   });
+// };
+
+module.exports = { addFavourite, deleteFavourite, getFavouriteMaps };
