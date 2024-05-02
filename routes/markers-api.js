@@ -1,7 +1,7 @@
 /*
  * All routes for Marker Data are defined here
- * Since this file is loaded in server.js into api/maps
- *   these routes are mounted onto /api/maps
+ * Since this file is loaded in server.js into api/maps/:map_id/markers,
+ *   these routes are mounted onto /api/maps/:map_id/markers
  * See: https://expressjs.com/en/guide/using-middleware.html#middleware.router
  */
 
@@ -10,7 +10,7 @@ const router = express.Router();
 const { getMarkers, addMarker, deleteMarker, editMarker } = require('../db/queries/markers');
 const { getSingleMap } = require('../db/queries/maps');
 
-// any routes will come AFTER /api/maps
+// any routes will come AFTER /api/maps/:map_id/markers/
 
 // get a JSON/fetch marker for a specific map
 router.get('/', (req, res) => {
@@ -28,7 +28,7 @@ router.get('/', (req, res) => {
 });
 
 // edit a marker
-router.post('/:map_id/:marker_id', (req, res) => {
+router.post('/:marker_id', (req, res) => {
   const markerID = req.params.markerID;
   const updatedMarker = req.body;
 
@@ -60,9 +60,8 @@ router.post('/:map_id/markers', (req, res) => {
 });
 
 // delete a marker form a specific map
-router.post('/:map_id/markers/:marker_id/delete', (req, res) => {
-  const markerID = req.params.marker_id;
-  console.log("deleted route markerID", markerID)
+router.post('/:marker_id/delete', (req, res) => {
+  const markerID = req.body.id;
 
   deleteMarker(markerID)
     .then(marker => {
@@ -81,7 +80,7 @@ router.get('/:map_id', (req, res) => {
     .then((map) => {
       if (map) {
         console.log("map----", map)
-        const templateVars = { lat: map.lat, long: map.long, zoom: 11, markers: map.markers, mapID };
+        const templateVars = { lat: map.lat, long: map.long, zoom: 11, markers: map.markers };
         console.log("templateVars------", templateVars);
         return res.send(templateVars);
       }
