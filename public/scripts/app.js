@@ -23,7 +23,7 @@ const loadMap = (paramsObj) => {
     <br><img src="${data.image_url}" alt="Marker Image">
     <p>${data.description}</p>
     <button id="edit-marker-btn" class="btn btn-primary">Edit</button>
-    <button id="delete-marker-btn" class="btn btn-danger">Delete</button>`).openPopup();
+    <button id="delete-marker-btn" class="${data.id}">Delete</button>`);
   });
   return map;
 };
