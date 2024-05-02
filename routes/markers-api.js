@@ -60,8 +60,9 @@ router.post('/:map_id/markers', (req, res) => {
 });
 
 // delete a marker form a specific map
-router.post('/:marker_id/delete', (req, res) => {
-  const markerID = req.body.id;
+router.post('/:map_id/markers/:marker_id/delete', (req, res) => {
+  const markerID = req.params.marker_id;
+  console.log("markerID in post req", markerID);
 
   deleteMarker(markerID)
     .then(marker => {
