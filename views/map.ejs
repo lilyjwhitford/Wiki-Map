@@ -127,21 +127,22 @@
       })
     })
 
-    $('#map-container i').on('click', (event) => {
-        const mapID = data.mapID;
-        const userID = data.userID;
-        console.log('Map ID: ', mapID, 'User ID: ', userID);
-        if (!userID) {
-          console.log('Need to be logged in to favourite');
-          event.preventDefault();
-          return;
-        }
+    $('#map-container i').on('click', () => {
         // adds a map to map_favourites
         $.ajax({
           method: "POST",
-          url: `/api/maps/favourite/${mapID}`,
+          url: `/api/maps/favourite/<%= map.id %>`,
           success: function(data) {
             console.log('Favourited successfully', data);
+
+            $.get("/api/maps/<%= map.id %>")
+          .then(mapDataResponse => {
+            //remove current map on page
+            currentMap.remove();
+            //add all markers, including the new marker, to the map
+            loadMap(mapDataResponse);
+            
+          })
           },
           error: function(xhr, status, error) {
             console.error('Error favouriting map: ', error);

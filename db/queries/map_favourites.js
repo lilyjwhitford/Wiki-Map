@@ -4,7 +4,7 @@ const addFavourite = (map_id, user_id) => {
   return db.query(`
   INSERT INTO map_favourites (user_id, map_id) VALUES
   ($1, $2) RETURNING *
-  ;`, [map_id, user_id])
+  ;`, [user_id, map_id])
   .then(result => {
     console.log('addFavourite Result: ', result);
     return result.rows[0];

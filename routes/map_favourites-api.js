@@ -7,6 +7,7 @@ router.get('/', (req, res) => {
   const mapID = req.params.map_id;
   const userID = req.cookies.user_id;
 
+
   getFavouriteMaps(mapID, userID)
   .then(maps => {
     res.json({ maps });
@@ -42,7 +43,7 @@ router.post('/:map_id/delete', (req, res) => {
     res.json({ deleted_id });
   })
   .catch(err => {
-    res.json({ success: false, error: err })
+    res.json({ error: err.message })
   })
 });
 
