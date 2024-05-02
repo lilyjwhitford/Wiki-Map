@@ -28,12 +28,13 @@ router.get('/', (req, res) => {
 });
 
 // edit a marker
-router.post('/:marker_id', (req, res) => {
-  const markerID = req.params.markerID;
+router.post('/:map_id/markers/:marker_id', (req, res) => {
+  const markerID = req.params.marker_id;
   const updatedMarker = req.body;
 
   editMarker(markerID, updatedMarker)
     .then(marker => {
+      console.log("marker", marker);
       res.json({ marker })
     })
     .catch(err => {
