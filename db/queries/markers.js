@@ -55,7 +55,7 @@ const addMarker = (markerData) => {
 
 const deleteMarker = (markerID) => {
   const queryParams = [markerID];
-  const queryString = `DELETE FROM markers WHERE id = $1 RETURNING *;`;
+  const queryString = `DELETE FROM markers WHERE id = $1 RETURNING id;`;
 
   return db.query(queryString, queryParams)
     .then(results => {
