@@ -28,27 +28,5 @@ const loadMap = (paramsObj) => {
 
   });
 
-  map.on('popupopen', function () {
-    $('#delete-marker-btn').click(function (e) {
-      e.preventDefault();
-      // get markerID from buttons data attribute
-      console.log(e);
-      let markerID = e.target.className;
-      // let mapID = e.
-      console.log(markerID);
-      // // post request to delete the marker
-      $.post(`/api/maps/${mapID}/markers/${markerID}/delete`)
-        .then((response) => { console.log(response)      
-          // $.get(`/api/maps/${mapID}`)              //with this uncommented it messes with the add marker
-          //   .then(mapDataResponse => {
-          //     // remove current map on page
-          //     map.remove();
-          //     // add all markers, including the new marker, to the map
-          //     loadMap(mapDataResponse);
-            // })
-        });
-    });
-  })
-
   return map;
 };
