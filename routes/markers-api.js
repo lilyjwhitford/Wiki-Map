@@ -35,7 +35,6 @@ router.post('/:map_id/markers/:marker_id', (req, res) => {
   const userID = req.cookies.user_id;
 
   if (!userID) {
-    // return res.send(`<script>alert('Must be logged in to add a marker')</script>`);
     return res.status(401).send('Must be logged in to edit marker');
   }
 
@@ -58,7 +57,6 @@ router.post('/:map_id/markers', (req, res) => {
   markerData.map_id = req.params.map_id; // include map_id in req body?
 
   if (!userID) {
-    // return res.send(`<script>alert('Must be logged in to add a marker')</script>`);
     return res.status(401).send('Must be logged in to add marker');
   }
 
@@ -80,7 +78,6 @@ router.post('/:map_id/markers/:marker_id/delete', (req, res) => {
   console.log("markerID in post req", markerID);
 
   if (!userID) {
-    // return res.send(`<script>alert('Must be logged in to add a marker')</script>`);
     return res.status(401).send('<html><body><h3>Must be logged in to delete marker</h3></body></html>');
   }
 
