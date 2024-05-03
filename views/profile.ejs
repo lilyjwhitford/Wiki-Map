@@ -26,29 +26,45 @@
   <div class="maps-container">
     <div class="maps-column">
         <h3>My Maps</h3>
-        <div>
+      
             <!-- loop to get each map the user has created -->
-            <% for (let map of user.owned) { %>
-              <a href="/maps/<%= map.id %>">
-                <article>
-                    <h1><%= map.title %></h1>
-                    <p><%= user.username %></p>
-                  </article></a>
+            <div class="all-maps">
+              <% for (let map of user.owned) { %>
+                <div class="map-container">
+                  <a href="/maps/<%= map.id %>">
+                    <img class="map-image" src="<%= map.image_url %>" alt="<%= map.title %> Image">
+                    <div class="map-title">
+                      <%= map.title %>
+                    </div>
+                    <div class="map-username">
+                      <p>Map created by:
+                        <%= user.username %>
+                      </p>
+                    </div>
+                  </a>
+                </div>
                 <% } %>
-              
             </div>
     </div>
     <div class="maps-favourites-column">
         <h3>My Favorite Maps</h3>
-        <div>
           <!-- loop to get each map the user has favourited -->
-          <% for (let map of user.favourites) { %>
-            <a href="/maps/<%= map.id %>">
-              <article>
-                  <h1><%= map.title %></h1>
-                </article></a>
+          <div class="all-maps">
+            <% for (let map of user.favourites) { %>
+              <div class="map-container">
+                <a href="/maps/<%= map.id %>">
+                  <img class="map-image" src="<%= map.image_url %>" alt="<%= map.title %> Image">
+                  <div class="map-title">
+                    <%= map.title %>
+                  </div>
+                  <div class="map-username">
+                    <p>Map created by:
+                      <%= user.username %>
+                    </p>
+                  </div>
+                </a>
+              </div>
               <% } %>
-            
           </div>
     </div>
 </div>
