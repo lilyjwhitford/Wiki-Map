@@ -1,9 +1,9 @@
 // See: https://sass-lang.com/
 
 $base-color: #545149;
-$background-color: whitesmoke;
-$primary-color: rgba(163, 208, 219, 1);
-$secondary-color: rgba(163, 173, 219, 1);
+$background-color: #f0f4ef;
+$primary-color: #344966;
+$secondary-color: #bfcc94;
 
 body,
 html {
@@ -19,20 +19,20 @@ html {
 
 body {
   background-color: $background-color;
-  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-family: "Montserrat", sans-serif;
 }
 
 form {
   width: 100%;
   max-width: 500px;
   margin: 0 auto;
-  background-color: rgb(214, 233, 238);
+  background-color: #bfcc94;
   padding: 20px;
   border-radius: 8px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
-h2 {
+h3 {
   text-align: center;
   margin: 25px;
 }
@@ -48,24 +48,24 @@ input[type="text"] {
   padding: 10px;
   margin-bottom: 20px;
   border: none;
-  background-color: rgb(214, 233, 238);
+  background-color: #bfcc94;
   transition: box-shadow 0.3s;
 }
 
 /* Add shadow when input is hovered */
 input[type="text"]:hover {
-  box-shadow: 0 2px 0 rgba(163, 173, 219, 0.5);
+  box-shadow: 0 2px 0 black;
 }
 
 .box button {
   width: 100%;
   padding: 10px;
   border: none;
-  background-color: rgba(163, 208, 219, 1);
-  color: whitesmoke;
+  background-color: #344966;
+  color: #f0f4ef;
   cursor: pointer;
 }
 
 .box button:hover {
-  background-color: rgba(163, 173, 219, 1);
+  background-color: #b4cded;
 }
