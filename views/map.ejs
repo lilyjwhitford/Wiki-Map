@@ -132,7 +132,7 @@
        // stringify our favouriteMap promise
        const favouriteMaps = <%- JSON.stringify(favouriteMap) %>;
        // if favouriteMaps has 1 or more items inside object add the class 'active'
-       if(favouriteMaps.length >= 1) {
+       if (favouriteMaps.length >= 1) {
          $('#map-container i').addClass('active');
        }
 
@@ -170,20 +170,16 @@
        $('#map-container i').on('click', () => {
          // if we click on the heart and its not in database add it
          // const favouriteMaps = <%- JSON.stringify(favouriteMap) %>;
-
          console.log('favouriteMaps: ', favouriteMaps);
-
          // if object is empty add to favourites
          // if (!favouriteMaps['<%= map.id %>'])
          if (!favouriteMaps['<%= map.id %>']) {
-
          $.ajax({
            method: "POST",
            url: "/api/maps/favourite/<%= map.id %>",
            success: function(data) {
              console.log('Favourited successfully', data);
-
-             // if post to add maps is succesful toggle .active
+             // if post to add maps is successful toggle .active
              $('#map-container i').toggleClass('active');
              // location.reload();
            },
@@ -193,7 +189,6 @@
          })
         } else {
          // otherwise delete it
-
          $.ajax({
            method: "POST",
            url: "/api/maps/favourite/<%= map.id %>/delete",
@@ -203,7 +198,7 @@
            }
          })
        }
-         })
+    })
 
 
       currentMap.on('popupopen', function () {
