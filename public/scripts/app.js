@@ -35,7 +35,7 @@ const loadMap = (paramsObj) => {
 //   });
 // };
 
-// const isFav = {
-//   active: false,
-//   favouriteMap: getFavouriteMaps(user_id, map_id)
-// }
+const isFav = {
+  active: false,
+  favouriteMap: getFavouriteMaps(user_id, map_id)
+}

@@ -96,6 +96,11 @@
 <script>
   let currentMap;
   $(document).ready(() => {
+    const favouriteMaps = <%- JSON.stringify(favouriteMap) %>;
+    if(favouriteMaps.length >= 1) {
+      $('#map-container i').addClass('active');
+    }
+
     // stringify the map and markers data pulled from database
     const data = <%- JSON.stringify(mapData) %>;
     // load map and marker data from database to the map
@@ -129,7 +134,7 @@
 
     $('#map-container i').on('click', () => {
       // if we click on the heart and its not in database add it
-      const favouriteMaps = <%- JSON.stringify(favouriteMap) %>;
+      // const favouriteMaps = <%- JSON.stringify(favouriteMap) %>;
 
       console.log('favouriteMaps: ', favouriteMaps);
 
