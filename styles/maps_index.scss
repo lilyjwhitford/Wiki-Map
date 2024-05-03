@@ -1,7 +1,121 @@
-h1 {
-  padding-top: 145px;
+.page-title {
+  padding-top: 60px;
   display: flex;
-  align-items: flex-start;
   justify-content: center;
-  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-family: "Montserrat", sans-serif;
+  font-weight: 400;
+  font-size: 320%;
+  animation: slideInFromLeft 1s ease-out forwards;
+}
+
+@keyframes slideInFromLeft {
+  0% {
+    transform: translateX(-100%);
+    opacity: 0;
+  }
+
+  100% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes slideInFromRight {
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+.page-header,
+.page-sub-header {
+  animation: slideInFromRight 1s ease-out forwards;
+}
+
+.page-header {
+  padding-bottom: 30px;
+  display: flex;
+  justify-content: center;
+  font-family: "Montserrat", sans-serif;
+  font-weight: 300;
+  font-size: 155%;
+}
+
+.page-sub-header {
+  padding-bottom: 30px;
+  display: flex;
+  justify-content: center;
+  font-family: "Montserrat", sans-serif;
+  font-weight: 300;
+  font-size: 155%;
+}
+
+
+.map-container {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  margin-bottom: 20px;
+  width: calc(50% - 20px);
+  flex-basis: calc(50% - 20px);
+  transition: 0.3s ease;
+}
+
+.map-container:hover {
+  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1), 4px 4px 8px rgba(0, 0, 0, 0.2);
+  border-radius: 10px;
+}
+
+.map-container a {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+}
+
+.map-container img {
+  width: 100%;
+  height: auto;
+  border-radius: 10px;
+}
+
+.map-title {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  bottom: 10px;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 5px;
+  font-family: "Montserrat", sans-serif;
+  font-weight: 300 bolder;
+  font-size: 2.5rem;
+  text-align: center;
+  width: 100%;
+  height: 100%;
+}
+
+.all-maps {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 20px;
+  margin: 2%;
+}
+
+
+.map-username {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  color: black;
+  font-family: "Montserrat", sans-serif;
+  font-weight: 300;
+  font-size: 100%;
 }

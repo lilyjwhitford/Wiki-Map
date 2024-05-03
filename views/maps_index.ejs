@@ -1,30 +1,49 @@
 <!DOCTYPE html>
+
 <html lang="en">
-  <head>
-    <title>Home Page</title>
 
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<head>
 
-    <link rel="stylesheet" href="/styles/maps_index.css" />
-  </head>
+  <title>Home Page</title>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  <body>
-    <%- include('partials/_header') %>
+  <link rel="stylesheet" href="/styles/maps_index.css" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"
+    rel="stylesheet">
+</head>
+
+<body>
+  <%- include('partials/_header') %>
 
     <div>
-      <h1>ALL YOUR FAVOURITES IN ONE PLACE</h1>
+      <h1 class="page-title">Discover and Explore with Wiki-Maps</h1>
+      <p class="page-header">All of Your Favourites in One Place.
+      <p class="page-sub-header">Browse Maps:</p>
+      </p>
     </div>
-    <div>
+
+    <div class="all-maps">
       <% for (let map of maps) { %>
-      <a href="/maps/<%= map.id %>"
-        ><article>
-          <h1><%= map.title %></h1>
-          <p><%= map.username %></p>
-        </article></a
-      >
-      <% } %>
+        <div class="map-container">
+          <a href="/maps/<%= map.id %>">
+            <img src="<%= map.image_url %>" alt="<%= map.title %> Image">
+            <div class="map-title">
+              <%= map.title %>
+            </div>
+            <div class="map-username">
+              <p>Map created by:
+                <%= map.username %>
+              </p>
+            </div>
+          </a>
+        </div>
+        <% } %>
     </div>
-  </body>
+</body>
+
 </html>
