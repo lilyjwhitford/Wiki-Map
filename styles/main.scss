@@ -4,7 +4,7 @@ body {
   justify-content: center;
   align-items: center;
   min-height: 100vh;
-  background-color: whitesmoke;
+  background-color: #f0f4ef;
 }
 
 #form form {
@@ -13,17 +13,46 @@ body {
   align-items: center;
 }
 
+h1 {
+  color: #344966;
+  font-size: 24px;
+  margin-top: 70px;
+  text-transform: uppercase;
+}
+
+p {
+  color: #bfcc94;
+  font-size: 16px;
+  padding-bottom: 50px;
+}
+
+h2 {
+  color: #344966;
+  font-size: 24px;
+  text-transform: lowercase;
+}
+
+h1,
+p,
+h2 {
+  text-align: center;
+}
+
 // Leaflet map CSS
 #map {
   padding-top: 200px;
   height: 400px;
-  width: 800px;
+  width: 80%;
   margin: 50px;
 }
 
 img {
   height: 75px;
   width: 75px;
+}
+
+#map-container {
+  width: 100%;
 }
 
 #map-container i {
@@ -42,4 +71,8 @@ img {
 
 #map-container i.active {
   color: red;
+}
+
+#edit-marker-form {
+  display: none;
 }

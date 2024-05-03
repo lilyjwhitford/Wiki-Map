@@ -17,6 +17,22 @@ router.get("/", (req, res) => {
     })
     .catch((err) => {
       res.status(500).json({ error: err.message });
+
+    });
+});
+
+router.get("/:user_id", (req, res) => {
+  const userId = req.params.user_id;
+  userQueries
+    .getUserById(userId)
+    .then((user) => {
+      if (!user) {
+        return res.status(404).json({ error: `No user with ID of ${userId}` });
+      }
+      res.json({ user });
+    })
+    .catch((err) => {
+      res.status(500).json({ error: err.message });
     });
 });
 

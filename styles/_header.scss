@@ -10,7 +10,7 @@ header {
   height: 70px;
   border-radius: 0.25rem;
   box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.1);
-  background-color: #f3f3f3;
+  background-color: #f0f4ef;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -20,26 +20,29 @@ header {
 #website-title {
   font-size: 45px;
   text-transform: uppercase;
-  font-family: Arial, sans-serif;
-  color: transparent;
+  font-family: "Montserrat", sans-serif;
+  color: #344966;
   -webkit-text-stroke: 2px black;
-  background-image: linear-gradient(
-    227deg,
-    rgba(163, 208, 219, 1) 0%,
-    rgba(163, 176, 219, 1) 20%,
-    rgba(163, 173, 219, 1) 34%,
-    rgba(163, 219, 208, 1) 59%,
-    rgba(163, 208, 219, 1) 74%,
-    rgba(163, 208, 219, 1) 100%
-  );
+  background-color: transparent;
   -webkit-background-clip: text;
   background-clip: text;
   padding: 10px;
   margin: 0;
 }
 
-a {
+#website-title a {
+  color: inherit;
   text-decoration: none;
+}
+
+a:hover {
+  text-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
+p.username {
+  color: #344966;
+  text-align: center;
+  margin-top: 47px;
 }
 
 nav {
@@ -57,7 +60,7 @@ nav {
 .logged-in a {
   text-decoration: none;
   color: #777;
-  font-family: Arial, sans-serif;
+  font-family: "Montserrat", sans-serif;
   font-size: inherit;
   margin-right: 20px;
 }

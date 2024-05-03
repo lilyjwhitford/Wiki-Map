@@ -9,7 +9,6 @@ const express = require('express');
 const router = express.Router();
 const { getMarkers, addMarker, deleteMarker, editMarker } = require('../db/queries/markers');
 const { getSingleMap } = require('../db/queries/maps');
-const { getFavouriteMaps } = require('../db/queries/map_favourites');
 
 // any routes will come AFTER /api/maps/:map_id/markers/
 
@@ -32,6 +31,11 @@ router.get('/', (req, res) => {
 router.post('/:map_id/markers/:marker_id', (req, res) => {
   const markerID = req.params.marker_id;
   const updatedMarker = req.body;
+  const userID = req.cookies.user_id;
+
+  if (!userID) {
+    return res.status(401).send('Must be logged in to edit marker');
+  }
 
   editMarker(markerID, updatedMarker)
     .then(marker => {
@@ -47,8 +51,13 @@ router.post('/:map_id/markers/:marker_id', (req, res) => {
 
 // add a marker to a specific map
 router.post('/:map_id/markers', (req, res) => {
+  const userID = req.cookies.user_id;
   const markerData = req.body;
   markerData.map_id = req.params.map_id; // include map_id in req body?
+
+  if (!userID) {
+    return res.status(401).send('Must be logged in to add marker');
+  }
 
   addMarker(markerData)
     .then(marker => {
@@ -64,7 +73,12 @@ router.post('/:map_id/markers', (req, res) => {
 // delete a marker form a specific map
 router.post('/:map_id/markers/:marker_id/delete', (req, res) => {
   const markerID = req.params.marker_id;
+  const userID = req.cookies.user_id;
   console.log("markerID in post req", markerID);
+
+  if (!userID) {
+    return res.status(401).send('<html><body><h3>Must be logged in to delete marker</h3></body></html>');
+  }
 
   deleteMarker(markerID)
     .then(marker => {

@@ -39,7 +39,7 @@
     <%- include('partials/_header') %>
     <div>
       <h1><%= map.title %></h1>
-      <p><%= map.username %></p>
+      <p>CREATED BY: <%= map.username %></p>
       <h2><%= map.description %></h2>
     </div>
 
@@ -50,12 +50,12 @@
     </div>
 
     <div class="box">
-      <h2 class="box-title">Add a New Marker!</h2>
       <form
-        id="add-marker-form"
-        action="/api/maps/<%= map.id %>/markers"
-        method="POST"
+      id="add-marker-form"
+      action="/api/maps/<%= map.id %>/markers"
+      method="POST"
       >
+      <h3 class="box-title">Add a New Marker!</h3>
         <div>
           <label for="lat">Latitude:</label>
           <input class="marker-lat" type="text" name="lat" />
@@ -86,13 +86,13 @@
     </div>
 
     <div class="box">
-      <h2 class="box-title">Edit Marker</h2>
       <form
-        id="edit-marker-form"
-        action="/api/maps/<%= map.id %>/markers/:marker_id"
-        method="POST"
+      id="edit-marker-form"
+      action="/api/maps/<%= map.id %>/markers/:marker_id"
+      method="POST"
       >
-        <div>
+      <h3 class="box-title">Edit Marker</h3>
+    <div>
           <label for="lat">Latitude:</label>
           <input class="edit-marker-lat" type="text" name="lat" />
         </div>
@@ -122,8 +122,8 @@
         </div>
 
         <button type="submit">Edit Marker</button>
+      </div>
       </form>
-    </div>
   </body>
 
   <script>
@@ -132,7 +132,7 @@
        // stringify our favouriteMap promise
        const favouriteMaps = <%- JSON.stringify(favouriteMap) %>;
        // if favouriteMaps has 1 or more items inside object add the class 'active'
-       if(favouriteMaps.length >= 1) {
+       if (favouriteMaps.length >= 1) {
          $('#map-container i').addClass('active');
        }
 
@@ -170,20 +170,16 @@
        $('#map-container i').on('click', () => {
          // if we click on the heart and its not in database add it
          // const favouriteMaps = <%- JSON.stringify(favouriteMap) %>;
-
          console.log('favouriteMaps: ', favouriteMaps);
-
          // if object is empty add to favourites
          // if (!favouriteMaps['<%= map.id %>'])
          if (!favouriteMaps['<%= map.id %>']) {
-
          $.ajax({
            method: "POST",
            url: "/api/maps/favourite/<%= map.id %>",
            success: function(data) {
              console.log('Favourited successfully', data);
-
-             // if post to add maps is succesful toggle .active
+             // if post to add maps is successful toggle .active
              $('#map-container i').toggleClass('active');
              // location.reload();
            },
@@ -193,7 +189,6 @@
          })
         } else {
          // otherwise delete it
-
          $.ajax({
            method: "POST",
            url: "/api/maps/favourite/<%= map.id %>/delete",
@@ -203,7 +198,7 @@
            }
          })
        }
-         })
+    })
 
 
       currentMap.on('popupopen', function () {
@@ -234,6 +229,8 @@
          e.preventDefault();
          let markerID = $(this).data('marker-id');
 
+         $('#edit-marker-form').toggle();
+
          $('#edit-marker-form').on("submit", function (e) {
          // prevent redirection
          e.preventDefault();
@@ -247,6 +244,7 @@
                  console.log("mapDataResponse-------------", mapDataResponse);
                  currentMap.remove();
                  currentMap = loadMap(mapDataResponse);
+                 $('#edit-marker-form').hide();
                })
              });
            });

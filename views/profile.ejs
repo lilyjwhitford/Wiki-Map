@@ -15,7 +15,7 @@
 
   <div class="profile-container">
     <div class="profile-photo">
-        <img src="<%= user.profile_photo %>" alt="Profile Photo">
+        <img src="<%= user.profile_photo_url %>" alt="Profile Photo">
     </div>
     <div class="profile-info">
         <h2><%= user.username %></h2>
@@ -26,24 +26,52 @@
   <div class="maps-container">
     <div class="maps-column">
         <h3>My Maps</h3>
-        <ul>
+      
             <!-- loop to get each map the user has created -->
-                <li>
-                  <p>list of all of users maps will go here</p>
-                </li>
-        </ul>
+            <div class="all-maps">
+              <% for (let map of user.owned) { %>
+                <div class="map-container">
+                  <a href="/maps/<%= map.id %>">
+                    <img class="map-image" src="<%= map.image_url %>" alt="<%= map.title %> Image">
+                    <div class="map-title">
+                      <%= map.title %>
+                    </div>
+                    <div class="map-username">
+                      <p>Map created by:
+                        <%= user.username %>
+                      </p>
+                    </div>
+                  </a>
+                </div>
+                <% } %>
+            </div>
     </div>
     <div class="maps-favourites-column">
         <h3>My Favorite Maps</h3>
-        <ul>
-            <!-- loop to get each map user has favourited -->
-                <li>
-                  <p>list of all of users favourited maps will go here</p>
-                </li>
-        </ul>
+          <!-- loop to get each map the user has favourited -->
+          <div class="all-maps">
+            <% for (let map of user.favourites) { %>
+              <div class="map-container">
+                <a href="/maps/<%= map.id %>">
+                  <img class="map-image" src="<%= map.image_url %>" alt="<%= map.title %> Image">
+                  <div class="map-title">
+                    <%= map.title %>
+                  </div>
+                  <div class="map-username">
+                    <p>Map created by:
+                      <%= user.username %>
+                    </p>
+                  </div>
+                </a>
+              </div>
+              <% } %>
+          </div>
     </div>
 </div>
 
 </body>
 
 </html>
+
+
+

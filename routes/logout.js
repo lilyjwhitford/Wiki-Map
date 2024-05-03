@@ -1,7 +1,8 @@
 const express = require("express");
 const router = express.Router();
 
-router.post("/", (req, res) => {
+
+router.get('/', (req, res) => {
   // clear user_id cookie
   res.clearCookie("user_id");
 
