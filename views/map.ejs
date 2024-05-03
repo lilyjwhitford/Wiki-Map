@@ -96,7 +96,9 @@
 <script>
   let currentMap;
   $(document).ready(() => {
+    // stringify our favouriteMap promise
     const favouriteMaps = <%- JSON.stringify(favouriteMap) %>;
+    // if favouriteMaps has 1 or more items inside object add the class 'active'
     if(favouriteMaps.length >= 1) {
       $('#map-container i').addClass('active');
     }
@@ -150,7 +152,7 @@
 
           // if post to add maps is succesful toggle .active
           $('#map-container i').toggleClass('active');
-          // location.reload();
+          location.reload();
         },
         error: function(xhr, status, error) {
           console.error('Error favouriting map: ', error);
