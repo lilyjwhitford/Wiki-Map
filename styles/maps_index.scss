@@ -6,6 +6,7 @@
   font-weight: 400;
   font-size: 320%;
   animation: slideInFromLeft 1s ease-out forwards;
+  text-transform: uppercase;
 }
 
 @keyframes slideInFromLeft {
@@ -44,6 +45,7 @@
   font-family: "Montserrat", sans-serif;
   font-weight: 300;
   font-size: 155%;
+  font-style: italic;
 }
 
 .page-sub-header {
