@@ -5,22 +5,21 @@
  * See: https://expressjs.com/en/guide/using-middleware.html#middleware.router
  */
 
-const express = require('express');
-const router  = express.Router();
-const { getUserById } = require('../db/queries/users');
+const express = require("express");
+const router = express.Router();
+const { getUserById } = require("../db/queries/users");
 
-router.get('/:user_id', (req, res) => {
+router.get("/:user_id", (req, res) => {
   const userId = req.params.user_id;
 
-  getUserById(userId)
-  .then(user => {
+  getUserById(userId).then((user) => {
     if (!user) {
       return res.status(404).send(`No user with ID of ${userId}`);
     }
-      const templateVars = { user }
+    const templateVars = { user };
 
-      res.render('profile', templateVars)
-    });
+    res.render("profile", templateVars);
+  });
 });
 
 module.exports = router;
