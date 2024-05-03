@@ -1,3 +1,4 @@
+///queries/maps.js
 const db = require('../connection');
 
 const getAllMaps = () => {
@@ -35,6 +36,7 @@ const getSingleMap = (mapID) => {
 
   return Promise.all(promiseArray)
     .then(results => {
+      console.log(results);
       const map = results[0].rows[0];
       const markers = results[1].rows;
       const mapObj = { ...map, markers }
