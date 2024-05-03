@@ -8,6 +8,7 @@
 const express = require('express');
 const { getAllMaps, getSingleMap, createMap } = require('../db/queries/maps');
 const { getFavouriteMaps } = require('../db/queries/map_favourites');
+
 const router = express.Router();
 
 router.get("/", (req, res) => {
@@ -22,7 +23,7 @@ router.get("/", (req, res) => {
 });
 
 // submitting a new map
-router.post("/", (req, res) => { });
+router.post("/", (req, res) => {});
 
 router.post("/new", (req, res) => {
   const userId = req.cookies.user_id;
@@ -37,15 +38,14 @@ router.post("/new", (req, res) => {
   newMap.owner_id = userId;
 
   createMap(newMap)
-    .then(map => {
+    .then((map) => {
       console.log(map);
       res.redirect(`/maps/${map.id}`);
     })
-    .catch(err => {
+    .catch((err) => {
       console.error(err);
-      res.status(500).send('Failed to create a map');
-    })
-
+      res.status(500).send("Failed to create a map");
+    });
 });
 
 // view form to create a new map
@@ -84,12 +84,11 @@ router.get("/:map_id", (req, res) => {
     });
 });
 
-
 // edit an existing map with id of map_id
-router.post("/:map_id", (req, res) => { });
+router.post("/:map_id", (req, res) => {});
 
 // delete an existing map with id of map_id
-router.post("/:map_id/delete", (req, res) => { });
+router.post("/:map_id/delete", (req, res) => {});
 
 // check cookie to view maps
 router.get("/maps", (req, res) => {
