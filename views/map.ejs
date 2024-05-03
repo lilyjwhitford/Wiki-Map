@@ -50,12 +50,12 @@
     </div>
 
     <div class="box">
-      <h2 class="box-title">Add a New Marker!</h2>
       <form
-        id="add-marker-form"
-        action="/api/maps/<%= map.id %>/markers"
-        method="POST"
+      id="add-marker-form"
+      action="/api/maps/<%= map.id %>/markers"
+      method="POST"
       >
+      <h2 class="box-title">Add a New Marker!</h2>
         <div>
           <label for="lat">Latitude:</label>
           <input class="marker-lat" type="text" name="lat" />
@@ -86,13 +86,13 @@
     </div>
 
     <div class="box">
-      <h2 class="box-title">Edit Marker</h2>
       <form
-        id="edit-marker-form"
-        action="/api/maps/<%= map.id %>/markers/:marker_id"
-        method="POST"
+      id="edit-marker-form"
+      action="/api/maps/<%= map.id %>/markers/:marker_id"
+      method="POST"
       >
-        <div>
+      <h2 class="box-title">Edit Marker</h2>
+    <div>
           <label for="lat">Latitude:</label>
           <input class="edit-marker-lat" type="text" name="lat" />
         </div>
@@ -122,8 +122,8 @@
         </div>
 
         <button type="submit">Edit Marker</button>
+      </div>
       </form>
-    </div>
   </body>
 
   <script>
@@ -234,6 +234,8 @@
          e.preventDefault();
          let markerID = $(this).data('marker-id');
 
+         $('#edit-marker-form').toggle();
+
          $('#edit-marker-form').on("submit", function (e) {
          // prevent redirection
          e.preventDefault();
@@ -247,6 +249,7 @@
                  console.log("mapDataResponse-------------", mapDataResponse);
                  currentMap.remove();
                  currentMap = loadMap(mapDataResponse);
+                 $('#edit-marker-form').hide();
                })
              });
            });
