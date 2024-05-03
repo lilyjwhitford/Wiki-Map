@@ -140,6 +140,13 @@
        const data = <%- JSON.stringify(mapData) %>;
        // load map and marker data from database to the map
        currentMap = loadMap(data);
+       currentMap.on("click", event => {
+                console.log(event);
+                const lat = event.latlng.lat;
+                const long = event.latlng.lng;
+                $('.marker-lat').val(lat);
+                $('.marker-long').val(long);
+               })
        console.log('current map -----', currentMap);
 
        // when the 'Add marker' form is submitted
@@ -162,6 +169,16 @@
                currentMap.remove();
                //add all markers, including the new marker, to the map
                currentMap = loadMap(mapDataResponse);
+
+              // could be added to edit if we want
+              //  currentMap.on("click", event => {
+              //   console.log(event);
+              //   const lat = event.latlng.lat;
+              //   const long = event.latlng.lng;
+              //   $('.edit-marker-lat').val(lat);
+              //   $('.edit-marker-long').val(long);
+              //  })
+
              })
            }
          })

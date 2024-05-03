@@ -17,7 +17,7 @@ const getAllMaps = () => {
 const getSingleMap = (mapID) => {
   const queryParams = [mapID];
   const queryString = `
-  SELECT maps.*, users.*
+  SELECT maps.*, users.username
   FROM maps
   JOIN users ON owner_id = users.id
   WHERE maps.id = $1
