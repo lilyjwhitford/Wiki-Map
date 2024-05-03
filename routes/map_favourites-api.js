@@ -25,6 +25,10 @@ router.post('/:map_id', (req, res) => {
   const mapID = req.params.map_id;
   const userID = req.cookies.user_id;
 
+  if (!userID) {
+    return res.status(401).send('<html><body><h3>Must be logged in to add favourite map</h3></body></html>');
+  }
+
   addFavourite(userID, mapID)
   .then(favouriteMap => {
     res.json({ favouriteMap });
@@ -39,6 +43,10 @@ router.post('/:map_id', (req, res) => {
 router.post('/:map_id/delete', (req, res) => {
   const mapID = req.params.map_id;
   const userID = req.cookies.user_id;
+
+  if (!userID) {
+    return res.status(401).send('<html><body><h3>Must be logged in to delete favourite map</h3></body></html>');
+  }
 
   deleteFavourite(userID, mapID)
   .then(deleted_id => {
