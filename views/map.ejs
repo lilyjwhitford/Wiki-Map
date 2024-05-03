@@ -8,6 +8,12 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <meta name="viewport" content="width=device-width, initial-scale=1.0" >
 
+  <!-- jQuery library -->
+  <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script> -->
+  <!-- <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> -->
+  <!-- Add jQuery route -->
+  <!-- <script type="text/javascript" src="../public/scripts/client.js"></script> -->
+
   <!-- Font Awesome -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
@@ -28,10 +34,9 @@
   </div>
 
   <div id="map-container">
-  <div id="map">
-    <i class="fa-solid fa-heart"></i>
-  </div>
-
+    <div id="map">
+      <i class="fa-solid fa-heart"></i>
+    </div>
   </div>
 
   <div>
@@ -143,6 +148,13 @@
 <script>
   let currentMap;
   $(document).ready(() => {
+    // stringify our favouriteMap promise
+    const favouriteMaps = <%- JSON.stringify(favouriteMap) %>;
+    // if favouriteMaps has 1 or more items inside object add the class 'active'
+    if(favouriteMaps.length >= 1) {
+      $('#map-container i').addClass('active');
+    }
+
     // stringify the map and markers data pulled from database
     const data = <%- JSON.stringify(mapData) %>;
     // load map and marker data from database to the map
@@ -174,6 +186,47 @@
       })
     })
 
+    $('#map-container i').on('click', () => {
+      // if we click on the heart and its not in database add it
+      // const favouriteMaps = <%- JSON.stringify(favouriteMap) %>;
+
+      console.log('favouriteMaps: ', favouriteMaps);
+
+      // if object is empty add to favourites
+      // if (!favouriteMaps['<%= map.id %>'])
+      if (!favouriteMaps['<%= map.id %>']) {
+
+      $.ajax({
+        method: "POST",
+        url: "/api/maps/favourite/<%= map.id %>",
+        success: function(data) {
+          console.log('Favourited successfully', data);
+
+          // if post to add maps is succesful toggle .active
+          $('#map-container i').toggleClass('active');
+          location.reload();
+        },
+        error: function(xhr, status, error) {
+          console.error('Error favouriting map: ', error);
+        }
+      })
+    } else {
+      // otherwise delete it
+
+      $.ajax({
+        method: "POST",
+        url: "/api/maps/favourite/<%= map.id %>/delete",
+        success: function(data) {
+          console.log('Deleted successfully', data);
+          // location.reload();
+        }
+      })
+    }
+      })
+
+ })
+
+
     currentMap.on('popupopen', function () {
     $(document).on('click', '#edit-marker-btn', function (e) {
       e.preventDefault();
@@ -198,7 +251,7 @@
       })
     })
 
-  });
+
  </script>
 
 </html>

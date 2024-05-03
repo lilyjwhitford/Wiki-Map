@@ -27,3 +27,20 @@ const loadMap = (paramsObj) => {
   });
   return map;
 };
+
+// const getFavouriteMaps = (user_id, map_id) => {
+//   return db.query(`
+//   SELECT * FROM map_favourites WHERE user_id = $1 AND map_id = $2
+//   `, [user_id, map_id])
+//   .then(result => {
+//     return result.rows;
+//   })
+//   .catch(err => {
+//     throw new Error('Could not retrieve map');
+//   });
+// };
+
+// const isFav = {
+//   active: false,
+//   favouriteMap: getFavouriteMaps(user_id, map_id)
+// }
