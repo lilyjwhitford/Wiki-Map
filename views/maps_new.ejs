@@ -12,39 +12,43 @@
 
 <body>
   <%- include('partials/_header') %>
-  <div id="form">
-  <form method="POST" action="/maps/new">
-    <h2>Create a map</h2>
-
-    <input
-    type="text"
-    name="title"
-    placeholder="Title"
+  <div class="box">
+    <form
+    id="form"
+    action="/maps/new"
+    method="POST"
     >
+    <h3 class="box-title">Create a Map!</h3>
+      <div>
 
-    <input
-    type="text"
-    name="lat"
-    placeholder="Latitude"
-    >
+        <div>
+          <label for="title">Title:</label>
+          <input class="marker-title" type="text" name="title" />
+        </div>
 
-    <input
-    type="text"
-    name="long"
-    placeholder="Longitude"
-    >
+        <label for="lat">Latitude:</label>
+        <input class="marker-lat" type="text" name="lat" />
+      </div>
 
-    <textarea name="description"
-    placeholder="Description"></textarea>
+      <div>
+        <label for="long">Longitude:</label>
+        <input class="marker-long" type="text" name="long" />
+      </div>
 
-    <input
-    type="url"
-    name="image_url"
-    placeholder="Image URL"
-    >
 
-    <input type="submit">
-  </form>
+      <div>
+        <label for="description">Description:</label>
+        <input class="marker-description" type="text" name="description" />
+      </div>
+
+      <div>
+        <label for="image_url">Image URL:</label>
+        <input class="marker-image-url" type="text" name="image_url" />
+      </div>
+
+      <button type="submit">Create Map</button>
+    </form>
+  </div>
   </div>
 </body>
 
