@@ -9,6 +9,7 @@ const express = require('express');
 const router = express.Router();
 const { getMarkers, addMarker, deleteMarker, editMarker } = require('../db/queries/markers');
 const { getSingleMap } = require('../db/queries/maps');
+const { getFavouriteMaps } = require('../db/queries/map_favourites');
 
 // any routes will come AFTER /api/maps/:map_id/markers/
 
@@ -61,8 +62,9 @@ router.post('/:map_id/markers', (req, res) => {
 });
 
 // delete a marker form a specific map
-router.post('/:marker_id/delete', (req, res) => {
-  const markerID = req.body.id;
+router.post('/:map_id/markers/:marker_id/delete', (req, res) => {
+  const markerID = req.params.marker_id;
+  console.log("markerID in post req", markerID);
 
   deleteMarker(markerID)
     .then(marker => {

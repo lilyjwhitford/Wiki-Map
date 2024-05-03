@@ -22,8 +22,25 @@ const loadMap = (paramsObj) => {
     <b>${data.title}</b>
     <br><img src="${data.image_url}" alt="Marker Image">
     <p>${data.description}</p>
-    <button id="edit-marker-btn" class="${data.id}">Edit</button>
-    <button id="delete-marker-btn" class="btn btn-danger">Delete</button>`);
+    <button id="edit-marker-btn" data-marker-id="${data.id}" class="btn btn-edit">Edit</button>
+    <button id="delete-marker-btn" data-marker-id="${data.id}" class="btn btn-danger">Delete</button>`);
   });
   return map;
 };
+
+// const getFavouriteMaps = (user_id, map_id) => {
+//   return db.query(`
+//   SELECT * FROM map_favourites WHERE user_id = $1 AND map_id = $2
+//   `, [user_id, map_id])
+//   .then(result => {
+//     return result.rows;
+//   })
+//   .catch(err => {
+//     throw new Error('Could not retrieve map');
+//   });
+// };
+
+// const isFav = {
+//   active: false,
+//   favouriteMap: getFavouriteMaps(user_id, map_id)
+// }
