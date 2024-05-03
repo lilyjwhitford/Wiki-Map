@@ -34,9 +34,9 @@
 
   </div>
 
-<h2>Add a new marker!</h2>
-   <div>
+  <div>
     <form id="add-marker-form" action="/api/maps/<%= map.id %>/markers" method="POST">
+      <h2>Add a new marker!</h2>
      <div>
       <label for="lat">Latitude:</label>
       <input
@@ -86,9 +86,9 @@
 
     </form>
 
-    <h2>Edit marker</h2>
-   <div>
-    <form id="edit-marker-form" action="/api/maps/<%= map.id %>/markers/:marker_id" method="POST">
+    <div>
+      <form id="edit-marker-form" action="/api/maps/<%= map.id %>/markers/:marker_id" method="POST">
+      <h2>Edit marker</h2>
      <div>
       <label for="lat">Latitude:</label>
       <input
@@ -175,17 +175,10 @@
     })
 
     currentMap.on('popupopen', function () {
-    $('#edit-marker-btn').on('click', function (e) {
+    $(document).on('click', '#edit-marker-btn', function (e) {
       e.preventDefault();
-      // get markerID from buttons data attribute
-      // console.log("the edit button was clicked", e);
-      // console.log("whatever this is ------", $(this));
-      // const markerID = $(this).attr('marker-id');
-      // const markerID = $(this).attr('id').split('-')[3];
-      let markerID = e.target.className;
-      // editMarker(markerID);
-      console.log("edit button clicked for marker ID:", markerID);
-      // console.log("the edit button was clicked", e.target.className);
+      let markerID = $(this).data('marker-id');
+
       $('#edit-marker-form').on("submit", function (e) {
       // prevent redirection
       e.preventDefault();
@@ -193,19 +186,19 @@
       let formData = $(this).serialize();
       console.log(formData);
       $.post(`/api/maps/<%= map.id %>/markers/${markerID}`, formData)
-        .then((response) => {
-          console.log(response);
+        .then(() => {
           $.get("/api/maps/<%= map.id %>")
             .then(mapDataResponse => {
               console.log("mapDataResponse-------------", mapDataResponse);
               currentMap.remove();
-              loadMap(mapDataResponse);
+              currentMap = loadMap(mapDataResponse);
             })
+          });
         });
-    });
-  })
-})
-  })
+      })
+    })
+
+  });
  </script>
 
 </html>
