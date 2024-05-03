@@ -128,26 +128,41 @@
     })
 
     $('#map-container i').on('click', () => {
-        // adds a map to map_favourites
-        $.ajax({
-          method: "POST",
-          url: `/api/maps/favourite/<%= map.id %>`,
-          success: function(data) {
-            console.log('Favourited successfully', data);
+      // if we click on the heart and its not in database add it
+      const favouriteMaps = <%- JSON.stringify(favouriteMap) %>;
 
-            $.get("/api/maps/<%= map.id %>")
-          .then(mapDataResponse => {
-            //remove current map on page
-            currentMap.remove();
-            //add all markers, including the new marker, to the map
-            loadMap(mapDataResponse);
-            
-          })
-          },
-          error: function(xhr, status, error) {
-            console.error('Error favouriting map: ', error);
-          }
-        })
+      console.log('favouriteMaps: ', favouriteMaps);
+
+      // if object is empty add to favourites
+      // if (!favouriteMaps['<%= map.id %>'])
+      if (!favouriteMaps['<%= map.id %>']) {
+
+      $.ajax({
+        method: "POST",
+        url: "/api/maps/favourite/<%= map.id %>",
+        success: function(data) {
+          console.log('Favourited successfully', data);
+
+          // if post to add maps is succesful toggle .active
+          $('#map-container i').toggleClass('active');
+          // location.reload();
+        },
+        error: function(xhr, status, error) {
+          console.error('Error favouriting map: ', error);
+        }
+      })
+    } else {
+      // otherwise delete it
+
+      $.ajax({
+        method: "POST",
+        url: "/api/maps/favourite/<%= map.id %>/delete",
+        success: function(data) {
+          console.log('Deleted successfully', data);
+          // location.reload();
+        }
+      })
+    }
       })
 
  })

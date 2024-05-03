@@ -6,9 +6,9 @@ const { addFavourite, deleteFavourite, getFavouriteMaps } = require('../db/queri
 router.get('/', (req, res) => {
   const mapID = req.params.map_id;
   const userID = req.cookies.user_id;
+  // const templateVars = { inDatabase };
 
-
-  getFavouriteMaps(mapID, userID)
+  getFavouriteMaps(userID, mapID)
   .then(maps => {
     res.json({ maps });
   })
@@ -23,7 +23,7 @@ router.post('/:map_id', (req, res) => {
   const mapID = req.params.map_id;
   const userID = req.cookies.user_id;
 
-  addFavourite(mapID, userID)
+  addFavourite(userID, mapID)
   .then(favouriteMap => {
     res.json({ favouriteMap });
   })
@@ -38,8 +38,9 @@ router.post('/:map_id/delete', (req, res) => {
   const mapID = req.params.map_id;
   const userID = req.cookies.user_id;
 
-  deleteFavourite(mapID, userID)
+  deleteFavourite(userID, mapID)
   .then(deleted_id => {
+    console.log('deleted_id:', deleted_id);
     res.json({ deleted_id });
   })
   .catch(err => {

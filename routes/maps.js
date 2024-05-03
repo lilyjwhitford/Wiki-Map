@@ -7,6 +7,7 @@
 
 const express = require('express');
 const { getAllMaps, getSingleMap, createMap } = require('../db/queries/maps');
+const { getFavouriteMaps } = require('../db/queries/map_favourites');
 const router = express.Router();
 
 router.get("/", (req, res) => {
@@ -67,11 +68,12 @@ router.get("/new", (req, res) => {
 router.get("/:map_id", (req, res) => {
   const mapID = req.params.map_id;
   const userID = req.cookies.user_id;
-  getSingleMap(mapID)
-    .then((map) => {
+
+  Promise.all([getSingleMap(mapID), getFavouriteMaps(userID, mapID)])
+    .then(([map, favouriteMap]) => {
       if (map) {
         console.log("map----", map)
-        const templateVars = { map, mapData: { lat: map.lat, long: map.long, zoom: 11, markers: map.markers, userID, mapID } };
+        const templateVars = { map, mapData: { lat: map.lat, long: map.long, zoom: 11, markers: map.markers}, favouriteMap, mapID, userID };
         console.log("templateVars------", templateVars);
         return res.render("map", templateVars);
       }

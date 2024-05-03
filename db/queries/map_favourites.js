@@ -1,6 +1,6 @@
 const db = require('../connection');
 
-const addFavourite = (map_id, user_id) => {
+const addFavourite = (user_id, map_id) => {
   return db.query(`
   INSERT INTO map_favourites (user_id, map_id) VALUES
   ($1, $2) RETURNING *
@@ -15,10 +15,10 @@ const addFavourite = (map_id, user_id) => {
   });
 };
 
-const deleteFavourite = (map_id, user_id) => {
+const deleteFavourite = (user_id, map_id) => {
   return db.query(`
-  DELETE FROM map_favourites WHERE map_id = $1 AND user_id = $2
-  ;`, [map_id, user_id])
+  DELETE FROM map_favourites WHERE user_id = $1 AND map_id = $2
+  ;`, [user_id, map_id])
   .then(result => {
     return result.rows[0];
   })
@@ -28,10 +28,10 @@ const deleteFavourite = (map_id, user_id) => {
   });
 };
 
-const getFavouriteMaps = (map_id, user_id) => {
+const getFavouriteMaps = (user_id, map_id) => {
   return db.query(`
-  SELECT * FROM map_favourites WHERE map_id = $1 AND user_id = $2
-  `, [map_id, user_id])
+  SELECT * FROM map_favourites WHERE user_id = $1 AND map_id = $2
+  `, [user_id, map_id])
   .then(result => {
     return result.rows;
   })
@@ -40,16 +40,12 @@ const getFavouriteMaps = (map_id, user_id) => {
   });
 };
 
-// const checkFavouriteMap = (mapID, userID) => {
+// const favouriteMaps = (user_id, map_id) => {
 //   return db.query(`
-//   SELECT * FROM map_favourites WHERE map_id = $1 AND user_id = $2
-//   `, [mapID, userID])
+//   SELECT * FROM map_favourites WHERE user_id = $1 AND map_id = $2
+//   `, [user_id, map_id])
 //   .then(result => {
-  //     if (result.rows.length === 0) {
-//       return false;
-//     } else {
-//       return true;
-//     }
+//       return result.rows;
 //   });
 // };
 

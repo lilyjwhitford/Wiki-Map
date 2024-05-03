@@ -9,6 +9,7 @@ const express = require('express');
 const router = express.Router();
 const { getMarkers, addMarker, deleteMarker, editMarker } = require('../db/queries/markers');
 const { getSingleMap } = require('../db/queries/maps');
+const { getFavouriteMaps } = require('../db/queries/map_favourites');
 
 // any routes will come AFTER /api/maps/:map_id/markers/
 
