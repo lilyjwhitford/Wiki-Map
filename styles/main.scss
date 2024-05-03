@@ -4,13 +4,38 @@ body {
   justify-content: center;
   align-items: center;
   min-height: 100vh;
-  background-color: whitesmoke;
+  background-color: #f0f4ef;
 }
 
 #form form {
   display: flex;
   flex-direction: column;
   align-items: center;
+}
+
+h1 {
+  color: #344966;
+  font-size: 24px;
+  margin-top: 70px;
+  text-transform: uppercase;
+}
+
+p {
+  color: #bfcc94;
+  font-size: 16px;
+  padding-bottom: 50px;
+}
+
+h2 {
+  color: #344966;
+  font-size: 24px;
+  text-transform: lowercase;
+}
+
+h1,
+p,
+h2 {
+  text-align: center;
 }
 
 // Leaflet map CSS
