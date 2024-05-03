@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>Home Page</title>
+    <title><%= map.title %></title>
 
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -35,12 +35,18 @@
     ></script>
   </head>
 
-  <body>
+  <body >
     <%- include('partials/_header') %>
-    <div>
-      <h1><%= map.title %></h1>
-      <p>CREATED BY: <%= map.username %></p>
-      <h2><%= map.description %></h2>
+
+    <main class="map-main">
+    <div class="map-info-container">
+      <div class="single-map-title">
+        <p id="single-map-title"><%= map.title %></p>
+        <h6 class="created-by">CREATED BY: <%= map.username %></h6>
+      </div>
+      <div class="map-description">
+      <h4><%= map.description %></h4>
+      </div>
     </div>
 
     <div id="map-container">
@@ -124,6 +130,7 @@
         <button type="submit">Edit Marker</button>
       </div>
       </form>
+    </main>
   </body>
 
   <script>
