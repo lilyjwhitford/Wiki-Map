@@ -23,7 +23,7 @@ const loadMap = (paramsObj) => {
     <br><img src="${data.image_url}" alt="Marker Image">
     <p>${data.description}</p>
     <button id="edit-marker-btn" data-marker-id="${data.id}" class="btn btn-edit">Edit</button>
-    <button id="delete-marker-btn" class="btn btn-danger">Delete</button>`);
+    <button id="delete-marker-btn" data-marker-id="${data.id}" class="btn btn-danger">Delete</button>`);
   });
   return map;
 };
