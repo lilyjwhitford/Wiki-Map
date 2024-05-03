@@ -1,0 +1,39 @@
+.profile-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding-top: 70px;
+ 
+}
+
+.profile-photo-container {
+  margin-right: 20px;
+}
+
+.profile-info {
+ display: flex;
+ flex-direction: column;
+ justify-content: center;
+ align-items: start;
+ margin-left: 20px;
+ max-width: 320px;
+
+}
+
+.profile-img {
+  height: 320px;
+  width: 320px;
+  object-fit: cover;
+  border-radius: 160px;
+  border: .75rem solid #344966;
+}
+
+.profile-handle {
+  padding-bottom: 10px;
+}
+
+.bio {
+  text-wrap: pretty;
+  text-align: left;  
+}
