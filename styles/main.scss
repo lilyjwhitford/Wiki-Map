@@ -34,3 +34,12 @@ img {
   z-index: 500;
   font-size: 22px;
 }
+
+#map-container i:hover {
+  color: red;
+  cursor: pointer;
+}
+
+#map-container i.active {
+  color: red;
+}

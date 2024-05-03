@@ -7,6 +7,12 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
+    <!-- jQuery library -->
+    <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script> -->
+    <!-- <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> -->
+    <!-- Add jQuery route -->
+    <!-- <script type="text/javascript" src="../public/scripts/client.js"></script> -->
+
     <!-- Font Awesome -->
     <link
       rel="stylesheet"
@@ -121,70 +127,131 @@
   </body>
 
   <script>
-      let currentMap;
-      $(document).ready(() => {
-        // stringify the map and markers data pulled from database
-        const data = <%- JSON.stringify(mapData) %>;
-        // load map and marker data from database to the map
-        currentMap = loadMap(data);
-        console.log('current map -----', currentMap);
+     let currentMap;
+     $(document).ready(() => {
+       // stringify our favouriteMap promise
+       const favouriteMaps = <%- JSON.stringify(favouriteMap) %>;
+       // if favouriteMaps has 1 or more items inside object add the class 'active'
+       if(favouriteMaps.length >= 1) {
+         $('#map-container i').addClass('active');
+       }
 
-        // when the 'Add marker' form is submitted
-        $('#add-marker-form').on("submit", function (e) {
-          // prevent redirection
-          e.preventDefault();
-          // serialize form data
-          let formData = $(this).serialize();
-          console.log(formData);
-          // post request to add the new marker data to the database
-          $.ajax({
-            method: "POST",
-            url: "/api/maps/<%= map.id %>/markers",
-            data: formData,
-            success: function(response) {
-              // load new marker into map
-              $.get("/api/maps/<%= map.id %>")
-              .then(mapDataResponse => {
-                //remove current map on page
-                currentMap.remove();
-                //add all markers, including the new marker, to the map
-                loadMap(mapDataResponse);
-              })
-            }
-          })
-        })
+       // stringify the map and markers data pulled from database
+       const data = <%- JSON.stringify(mapData) %>;
+       // load map and marker data from database to the map
+       currentMap = loadMap(data);
+       console.log('current map -----', currentMap);
 
-        currentMap.on('popupopen', function () {
-        $('#edit-marker-btn').on('click', function (e) {
-          e.preventDefault();
-          // get markerID from buttons data attribute
-          // console.log("the edit button was clicked", e);
-          // console.log("whatever this is ------", $(this));
-          // const markerID = $(this).attr('marker-id');
-          // const markerID = $(this).attr('id').split('-')[3];
-          let markerID = e.target.className;
-          // editMarker(markerID);
-          console.log("edit button clicked for marker ID:", markerID);
-          // console.log("the edit button was clicked", e.target.className);
-          $('#edit-marker-form').on("submit", function (e) {
-          // prevent redirection
-          e.preventDefault();
-          // serialize form data
-          let formData = $(this).serialize();
-          console.log(formData);
-          $.post(`/api/maps/<%= map.id %>/markers/${markerID}`, formData)
-            .then((response) => {
-              console.log(response);
-              $.get("/api/maps/<%= map.id %>")
-                .then(mapDataResponse => {
-                  console.log("mapDataResponse-------------", mapDataResponse);
-                  currentMap.remove();
-                  loadMap(mapDataResponse);
-                })
-            });
-        });
-      })
+       // when the 'Add marker' form is submitted
+       $('#add-marker-form').on("submit", function (e) {
+         // prevent redirection
+         e.preventDefault();
+         // serialize form data
+         let formData = $(this).serialize();
+         console.log(formData);
+         // post request to add the new marker data to the database
+         $.ajax({
+           method: "POST",
+           url: "/api/maps/<%= map.id %>/markers",
+           data: formData,
+           success: function(response) {
+             // load new marker into map
+             $.get("/api/maps/<%= map.id %>")
+             .then(mapDataResponse => {
+               //remove current map on page
+               currentMap.remove();
+               //add all markers, including the new marker, to the map
+               currentMap = loadMap(mapDataResponse);
+             })
+           }
+         })
+       })
+
+       $('#map-container i').on('click', () => {
+         // if we click on the heart and its not in database add it
+         // const favouriteMaps = <%- JSON.stringify(favouriteMap) %>;
+
+         console.log('favouriteMaps: ', favouriteMaps);
+
+         // if object is empty add to favourites
+         // if (!favouriteMaps['<%= map.id %>'])
+         if (!favouriteMaps['<%= map.id %>']) {
+
+         $.ajax({
+           method: "POST",
+           url: "/api/maps/favourite/<%= map.id %>",
+           success: function(data) {
+             console.log('Favourited successfully', data);
+
+             // if post to add maps is succesful toggle .active
+             $('#map-container i').toggleClass('active');
+             // location.reload();
+           },
+           error: function(xhr, status, error) {
+             console.error('Error favouriting map: ', error);
+           }
+         })
+        } else {
+         // otherwise delete it
+
+         $.ajax({
+           method: "POST",
+           url: "/api/maps/favourite/<%= map.id %>/delete",
+           success: function(data) {
+             console.log('Deleted successfully', data);
+             // location.reload();
+           }
+         })
+       }
+         })
+
+
+      currentMap.on('popupopen', function () {
+         $(document).on('click', '#delete-marker-btn', function (e) {
+           e.preventDefault();
+           // get markerID from buttons data attribute
+           // console.log(e);
+           let markerID = $(this).data('marker-id');
+           // console.log(markerID);
+           // // post request to delete the marker
+           $.post(`/api/maps/<%= map.id %>/markers/${markerID}/delete`)
+             .then(() => {
+               $.get("/api/maps/<%= map.id %>")
+                 .then(mapDataResponse => {
+                   // console.log("mapDataResponse-------------", mapDataResponse)
+                   // remove current map on page
+                   currentMap.remove();
+                   // add all markers, including the new marker, to the map
+                   currentMap = loadMap(mapDataResponse);
+                 })
+             });
+         });
+       })
+
+
+       currentMap.on('popupopen', function () {
+       $(document).on('click', '#edit-marker-btn', function (e) {
+         e.preventDefault();
+         let markerID = $(this).data('marker-id');
+
+         $('#edit-marker-form').on("submit", function (e) {
+         // prevent redirection
+         e.preventDefault();
+         // serialize form data
+         let formData = $(this).serialize();
+         console.log(formData);
+         $.post(`/api/maps/<%= map.id %>/markers/${markerID}`, formData)
+           .then(() => {
+             $.get("/api/maps/<%= map.id %>")
+               .then(mapDataResponse => {
+                 console.log("mapDataResponse-------------", mapDataResponse);
+                 currentMap.remove();
+                 currentMap = loadMap(mapDataResponse);
+               })
+             });
+           });
+         })
+       })
     })
-      })
   </script>
 </html>
