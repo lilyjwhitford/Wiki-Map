@@ -14,15 +14,19 @@
   <%- include('partials/_header') %>
 
   <div class="profile-container">
-    <div class="profile-photo">
-        <img src="<%= user.profile_photo_url %>" alt="Profile Photo">
+
+    <div class="profile-photo-container">
+        <img class="profile-img" src="<%= user.profile_photo_url %>" alt="Profile Photo">
     </div>
+
     <div class="profile-info">
-        <h2><%= user.username %></h2>
-        <p><%= user.bio %></p>
+        <h2 class="profile-handle"><%= user.username %></h2>
+        <p class="bio"><%= user.bio %></p>
     </div>
+
   </div>
 
+<main>
   <div class="maps-container">
     <div class="maps-column">
         <h3>My Maps</h3>
@@ -59,7 +63,7 @@
                   </div>
                   <div class="map-username">
                     <p>Map created by:
-                      <%= user.username %>
+                      <%= map.username %>
                     </p>
                   </div>
                 </a>
@@ -68,6 +72,7 @@
           </div>
     </div>
 </div>
+</main>
 
 </body>
 
