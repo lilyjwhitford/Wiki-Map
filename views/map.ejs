@@ -180,7 +180,7 @@
             //remove current map on page
             currentMap.remove();
             //add all markers, including the new marker, to the map
-            loadMap(mapDataResponse);
+            currentMap = loadMap(mapDataResponse);
           })
         }
       })
@@ -204,13 +204,13 @@
 
           // if post to add maps is succesful toggle .active
           $('#map-container i').toggleClass('active');
-          location.reload();
+          // location.reload();
         },
         error: function(xhr, status, error) {
           console.error('Error favouriting map: ', error);
         }
       })
-    } else {
+     } else {
       // otherwise delete it
 
       $.ajax({
@@ -223,6 +223,29 @@
       })
     }
       })
+
+
+   currentMap.on('popupopen', function () {
+      $(document).on('click', '#delete-marker-btn', function (e) {
+        e.preventDefault();
+        // get markerID from buttons data attribute
+        // console.log(e);
+        let markerID = $(this).data('marker-id');
+        // console.log(markerID);
+        // // post request to delete the marker
+        $.post(`/api/maps/<%= map.id %>/markers/${markerID}/delete`)
+          .then(() => {
+            $.get("/api/maps/<%= map.id %>")
+              .then(mapDataResponse => {
+                // console.log("mapDataResponse-------------", mapDataResponse)
+                // remove current map on page
+                currentMap.remove();
+                // add all markers, including the new marker, to the map
+                currentMap = loadMap(mapDataResponse);
+              })
+          });
+      });
+    })
 
 
     currentMap.on('popupopen', function () {
@@ -248,8 +271,9 @@
         });
       })
     })
+ })
 
-});
+
 
 
  </script>
