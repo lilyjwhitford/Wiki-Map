@@ -15,6 +15,7 @@ body {
 
 // Leaflet map CSS
 #map {
+  padding-top: 200px;
   height: 400px;
   width: 800px;
   margin: 50px;
@@ -32,9 +33,4 @@ img {
   padding: 10px;
   z-index: 500;
   font-size: 22px;
-}
-
-#map-container i:hover {
-  color: red;
-  cursor: pointer;
 }

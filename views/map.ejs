@@ -1,212 +1,190 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <title>Home Page</title>
 
-<head>
-  <title>Home Page</title>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  <meta charset="UTF-8" >
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" >
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" >
-
-  <!-- Font Awesome -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-
-  <!-- Leaflet CSS -->
-  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
-
-  <!-- Leaflet JS -->
-  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
-
-</head>
-
-<body>
-  <%- include('partials/_header') %>
-  <div>
-    <h1><%= map.title %></h1>
-    <p><%= map.username %></p>
-    <h2><%= map.description %></h2>
-  </div>
-
-  <div id="map-container">
-  <div id="map">
-    <i class="fa-solid fa-heart"></i>
-  </div>
-
-  </div>
-
-<h2>Add a new marker!</h2>
-   <div>
-    <form id="add-marker-form" action="/api/maps/<%= map.id %>/markers" method="POST">
-     <div>
-      <label for="lat">Latitude:</label>
-      <input
-      class="marker-lat"
-      type="text"
-      name="lat"
+    <!-- Font Awesome -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
     />
-     </div>
 
-      <div>
-       <label for="long">Longitude:</label>
-       <input
-       class="marker-long"
-       type="text"
-       name="long"
-     />
-      </div>
-
-      <div>
-        <label for="title">Title:</label>
-        <input
-        class="marker-title"
-        type="text"
-        name="title"
-      />
-       </div>
-
-       <div>
-        <label for="description">Description:</label>
-        <input
-        class="marker-description"
-        type="text"
-        name="description"
-      />
-       </div>
-
-       <div>
-        <label for="image_url">Image URL:</label>
-        <input
-        class="marker-image-url"
-        type="text"
-        name="image_url"
-      />
-       </div>
-
-       <button type="submit">Add Marker</button>
-
-    </form>
-
-    <h2>Edit marker</h2>
-   <div>
-    <form id="edit-marker-form" action="/api/maps/<%= map.id %>/markers/:marker_id" method="POST">
-     <div>
-      <label for="lat">Latitude:</label>
-      <input
-      class="edit-marker-lat"
-      type="text"
-      name="lat"
+    <!-- Leaflet CSS -->
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+      integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+      crossorigin=""
     />
-     </div>
 
-      <div>
-       <label for="long">Longitude:</label>
-       <input
-       class="edit-marker-long"
-       type="text"
-       name="long"
-     />
+    <!-- Leaflet JS -->
+    <script
+      src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+      integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+      crossorigin=""
+    ></script>
+  </head>
+
+  <body>
+    <%- include('partials/_header') %>
+    <div>
+      <h1><%= map.title %></h1>
+      <p><%= map.username %></p>
+      <h2><%= map.description %></h2>
+    </div>
+
+    <div id="map-container">
+      <div id="map">
+        <i class="fa-solid fa-heart"></i>
       </div>
+    </div>
 
-      <div>
-        <label for="title">Title:</label>
-        <input
-        class="edit-marker-title"
-        type="text"
-        name="title"
-      />
-       </div>
+    <div class="box">
+      <h2 class="box-title">Add a New Marker!</h2>
+      <form
+        id="add-marker-form"
+        action="/api/maps/<%= map.id %>/markers"
+        method="POST"
+      >
+        <div>
+          <label for="lat">Latitude:</label>
+          <input class="marker-lat" type="text" name="lat" />
+        </div>
 
-       <div>
-        <label for="description">Description:</label>
-        <input
-        class="edit-marker-description"
-        type="text"
-        name="description"
-      />
-       </div>
+        <div>
+          <label for="long">Longitude:</label>
+          <input class="marker-long" type="text" name="long" />
+        </div>
 
-       <div>
-        <label for="image_url">Image URL:</label>
-        <input
-        class="edit-marker-image-url"
-        type="text"
-        name="image_url"
-      />
-       </div>
+        <div>
+          <label for="title">Title:</label>
+          <input class="marker-title" type="text" name="title" />
+        </div>
 
-       <button type="submit">Edit Marker</button>
+        <div>
+          <label for="description">Description:</label>
+          <input class="marker-description" type="text" name="description" />
+        </div>
 
-    </form>
+        <div>
+          <label for="image_url">Image URL:</label>
+          <input class="marker-image-url" type="text" name="image_url" />
+        </div>
 
-</body>
+        <button type="submit">Add Marker</button>
+      </form>
+    </div>
 
-<script>
-  let currentMap;
-  $(document).ready(() => {
-    // stringify the map and markers data pulled from database
-    const data = <%- JSON.stringify(mapData) %>;
-    // load map and marker data from database to the map
-    currentMap = loadMap(data);
-    console.log('current map -----', currentMap);
+    <div class="box">
+      <h2 class="box-title">Edit Marker</h2>
+      <form
+        id="edit-marker-form"
+        action="/api/maps/<%= map.id %>/markers/:marker_id"
+        method="POST"
+      >
+        <div>
+          <label for="lat">Latitude:</label>
+          <input class="edit-marker-lat" type="text" name="lat" />
+        </div>
 
-    // when the 'Add marker' form is submitted
-    $('#add-marker-form').on("submit", function (e) {
-      // prevent redirection
-      e.preventDefault();
-      // serialize form data
-      let formData = $(this).serialize();
-      console.log(formData);
-      // post request to add the new marker data to the database
-      $.ajax({
-        method: "POST",
-        url: "/api/maps/<%= map.id %>/markers",
-        data: formData,
-        success: function(response) {
-          // load new marker into map
-          $.get("/api/maps/<%= map.id %>")
-          .then(mapDataResponse => {
-            //remove current map on page
-            currentMap.remove();
-            //add all markers, including the new marker, to the map
-            loadMap(mapDataResponse);
+        <div>
+          <label for="long">Longitude:</label>
+          <input class="edit-marker-long" type="text" name="long" />
+        </div>
+
+        <div>
+          <label for="title">Title:</label>
+          <input class="edit-marker-title" type="text" name="title" />
+        </div>
+
+        <div>
+          <label for="description">Description:</label>
+          <input
+            class="edit-marker-description"
+            type="text"
+            name="description"
+          />
+        </div>
+
+        <div>
+          <label for="image_url">Image URL:</label>
+          <input class="edit-marker-image-url" type="text" name="image_url" />
+        </div>
+
+        <button type="submit">Edit Marker</button>
+      </form>
+    </div>
+  </body>
+
+  <script>
+      let currentMap;
+      $(document).ready(() => {
+        // stringify the map and markers data pulled from database
+        const data = <%- JSON.stringify(mapData) %>;
+        // load map and marker data from database to the map
+        currentMap = loadMap(data);
+        console.log('current map -----', currentMap);
+
+        // when the 'Add marker' form is submitted
+        $('#add-marker-form').on("submit", function (e) {
+          // prevent redirection
+          e.preventDefault();
+          // serialize form data
+          let formData = $(this).serialize();
+          console.log(formData);
+          // post request to add the new marker data to the database
+          $.ajax({
+            method: "POST",
+            url: "/api/maps/<%= map.id %>/markers",
+            data: formData,
+            success: function(response) {
+              // load new marker into map
+              $.get("/api/maps/<%= map.id %>")
+              .then(mapDataResponse => {
+                //remove current map on page
+                currentMap.remove();
+                //add all markers, including the new marker, to the map
+                loadMap(mapDataResponse);
+              })
+            }
           })
-        }
+        })
+
+        currentMap.on('popupopen', function () {
+        $('#edit-marker-btn').on('click', function (e) {
+          e.preventDefault();
+          // get markerID from buttons data attribute
+          // console.log("the edit button was clicked", e);
+          // console.log("whatever this is ------", $(this));
+          // const markerID = $(this).attr('marker-id');
+          // const markerID = $(this).attr('id').split('-')[3];
+          let markerID = e.target.className;
+          // editMarker(markerID);
+          console.log("edit button clicked for marker ID:", markerID);
+          // console.log("the edit button was clicked", e.target.className);
+          $('#edit-marker-form').on("submit", function (e) {
+          // prevent redirection
+          e.preventDefault();
+          // serialize form data
+          let formData = $(this).serialize();
+          console.log(formData);
+          $.post(`/api/maps/<%= map.id %>/markers/${markerID}`, formData)
+            .then((response) => {
+              console.log(response);
+              $.get("/api/maps/<%= map.id %>")
+                .then(mapDataResponse => {
+                  console.log("mapDataResponse-------------", mapDataResponse);
+                  currentMap.remove();
+                  loadMap(mapDataResponse);
+                })
+            });
+        });
       })
     })
-
-    currentMap.on('popupopen', function () {
-    $('#edit-marker-btn').on('click', function (e) {
-      e.preventDefault();
-      // get markerID from buttons data attribute
-      // console.log("the edit button was clicked", e);
-      // console.log("whatever this is ------", $(this));
-      // const markerID = $(this).attr('marker-id');
-      // const markerID = $(this).attr('id').split('-')[3];
-      let markerID = e.target.className;
-      // editMarker(markerID);
-      console.log("edit button clicked for marker ID:", markerID);
-      // console.log("the edit button was clicked", e.target.className);
-      $('#edit-marker-form').on("submit", function (e) {
-      // prevent redirection
-      e.preventDefault();
-      // serialize form data
-      let formData = $(this).serialize();
-      console.log(formData);
-      $.post(`/api/maps/<%= map.id %>/markers/${markerID}`, formData)
-        .then((response) => {
-          console.log(response);
-          $.get("/api/maps/<%= map.id %>")
-            .then(mapDataResponse => {
-              console.log("mapDataResponse-------------", mapDataResponse);
-              currentMap.remove();
-              loadMap(mapDataResponse);
-            })
-        });
-    });
-  })
-})
-  })
- </script>
-
+      })
+  </script>
 </html>
-
