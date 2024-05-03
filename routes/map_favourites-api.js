@@ -6,7 +6,9 @@ const { addFavourite, deleteFavourite, getFavouriteMaps } = require('../db/queri
 router.get('/', (req, res) => {
   const mapID = req.params.map_id;
   const userID = req.cookies.user_id;
-  // const templateVars = { inDatabase };
+  if (!userID) {
+    return res.status(401).send('<html><body><h3>Must be logged in to view favourite map</h3></body></html>');
+  }
 
   getFavouriteMaps(userID, mapID)
   .then(maps => {
