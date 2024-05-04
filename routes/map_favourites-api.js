@@ -9,7 +9,6 @@ router.get('/', (req, res) => {
   if (!userID) {
     return res.status(401).send('<html><body><h3>Must be logged in to view favourite map</h3></body></html>');
   }
-
   getFavouriteMaps(userID, mapID)
   .then(maps => {
     res.json({ maps });
@@ -24,11 +23,9 @@ router.get('/', (req, res) => {
 router.post('/:map_id', (req, res) => {
   const mapID = req.params.map_id;
   const userID = req.cookies.user_id;
-
   if (!userID) {
     return res.status(401).send('<html><body><h3>Must be logged in to add favourite map</h3></body></html>');
   }
-
   addFavourite(userID, mapID)
   .then(favouriteMap => {
     res.json({ favouriteMap });
@@ -36,7 +33,6 @@ router.post('/:map_id', (req, res) => {
   .catch(err => {
     res.status(500).json({ error: err.message });
   })
-
 });
 
 // Deletes map
@@ -57,6 +53,5 @@ router.post('/:map_id/delete', (req, res) => {
     res.json({ error: err.message })
   })
 });
-
 
 module.exports = router;

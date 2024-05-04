@@ -7,34 +7,25 @@ const getUsers = () => {
     });
 };
 
-// const getUserById = (userId) => {
-//   const queryParams = [userId];
-//   const queryString = 'SELECT * FROM users WHERE id = $1;'
-//   return db.query(queryString, queryParams)
-//   .then(data => {
-//     return data.rows[0];
-//   });
-// };
-
 const getUserFavouriteAndOwnedMaps = (userId) => {
   const queryParams = [userId];
-  
+
   const userQueryString = `
-  SELECT users.* 
-  FROM users 
+  SELECT users.*
+  FROM users
   WHERE users.id = $1;`;
 
   const favouriteMapsQueryString = `
   SELECT map_favourites.*, maps.*
-  FROM map_favourites 
+  FROM map_favourites
   JOIN maps ON map_id = maps.id
   WHERE user_id = $1;`;
 
   const ownedMapsQueryString = `
   SELECT maps.*
-  FROM maps 
+  FROM maps
   WHERE owner_id = $1;`;
-  
+
   const userQuery = db.query(userQueryString, queryParams);
   const favouriteMapsQuery = db.query(favouriteMapsQueryString, queryParams);
   const ownedMapsQuery = db.query(ownedMapsQueryString, queryParams);
@@ -54,4 +45,5 @@ const getUserFavouriteAndOwnedMaps = (userId) => {
     throw new Error('Could not retrieve user, user favs and user maps');
   });
 };
+
 module.exports = { getUsers, getUserFavouriteAndOwnedMaps };

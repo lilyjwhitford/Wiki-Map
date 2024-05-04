@@ -177,13 +177,13 @@
                //add all markers, including the new marker, to the map
                currentMap = loadMap(mapDataResponse);
 
-              // could be added to edit if we want
+              // Stretch code: Upon implementation it interferred with edit/delete code
               //  currentMap.on("click", event => {
               //   console.log(event);
               //   const lat = event.latlng.lat;
               //   const long = event.latlng.lng;
-              //   $('.edit-marker-lat').val(lat);
-              //   $('.edit-marker-long').val(long);
+              //   $('.marker-lat').val(lat);
+              //   $('.marker-long').val(long);
               //  })
 
              })
@@ -193,10 +193,7 @@
 
        $('#map-container i').on('click', () => {
          // if we click on the heart and its not in database add it
-         // const favouriteMaps = <%- JSON.stringify(favouriteMap) %>;
-         console.log('favouriteMaps: ', favouriteMaps);
          // if object is empty add to favourites
-         // if (!favouriteMaps['<%= map.id %>'])
          if (!favouriteMaps['<%= map.id %>']) {
          $.ajax({
            method: "POST",
@@ -205,7 +202,6 @@
              console.log('Favourited successfully', data);
              // if post to add maps is successful toggle .active
              $('#map-container i').toggleClass('active');
-             // location.reload();
            },
            error: function(xhr, status, error) {
              console.error('Error favouriting map: ', error);
@@ -218,7 +214,6 @@
            url: "/api/maps/favourite/<%= map.id %>/delete",
            success: function(data) {
              console.log('Deleted successfully', data);
-             // location.reload();
            }
          })
        }
@@ -229,15 +224,12 @@
          $(document).on('click', '#delete-marker-btn', function (e) {
            e.preventDefault();
            // get markerID from buttons data attribute
-           // console.log(e);
            let markerID = $(this).data('marker-id');
-           // console.log(markerID);
            // // post request to delete the marker
            $.post(`/api/maps/<%= map.id %>/markers/${markerID}/delete`)
              .then(() => {
                $.get("/api/maps/<%= map.id %>")
                  .then(mapDataResponse => {
-                   // console.log("mapDataResponse-------------", mapDataResponse)
                    // remove current map on page
                    currentMap.remove();
                    // add all markers, including the new marker, to the map

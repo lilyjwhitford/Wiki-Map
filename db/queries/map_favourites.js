@@ -40,13 +40,4 @@ const getFavouriteMaps = (user_id, map_id) => {
   });
 };
 
-// const favouriteMaps = (user_id, map_id) => {
-//   return db.query(`
-//   SELECT * FROM map_favourites WHERE user_id = $1 AND map_id = $2
-//   `, [user_id, map_id])
-//   .then(result => {
-//       return result.rows;
-//   });
-// };
-
 module.exports = { addFavourite, deleteFavourite, getFavouriteMaps };

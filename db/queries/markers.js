@@ -66,7 +66,5 @@ const deleteMarker = (markerID) => {
     });
 }
 
-
-
 module.exports = { getMarkers, addMarker, deleteMarker, editMarker }
 

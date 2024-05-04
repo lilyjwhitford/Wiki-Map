@@ -49,7 +49,6 @@ router.post("/new", (req, res) => {
 });
 
 // view form to create a new map
-// route is maps/new
 router.get("/new", (req, res) => {
   // assign userId to the current session cookie
   const userId = req.cookies.user_id;
@@ -68,13 +67,10 @@ router.get("/new", (req, res) => {
 router.get("/:map_id", (req, res) => {
   const mapID = req.params.map_id;
   const userID = req.cookies.user_id;
-
   Promise.all([getSingleMap(mapID), getFavouriteMaps(userID, mapID)])
     .then(([map, favouriteMap]) => {
       if (map) {
-        console.log("map----", map)
         const templateVars = { map, mapData: { lat: map.lat, long: map.long, zoom: 11, markers: map.markers}, favouriteMap };
-        console.log("templateVars------", templateVars);
         return res.render("map", templateVars);
       }
       return res.send("map not found");
@@ -83,13 +79,6 @@ router.get("/:map_id", (req, res) => {
       return res.send(err.message);
     });
 });
-
-
-// edit an existing map with id of map_id
-router.post("/:map_id", (req, res) => { });
-
-// delete an existing map with id of map_id
-router.post("/:map_id/delete", (req, res) => { });
 
 // check cookie to view maps
 router.get("/maps", (req, res) => {
