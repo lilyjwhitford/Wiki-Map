@@ -10,7 +10,9 @@ VALUES (2, 'Top Hiking Trails', 'My favorite trails for a great adventure', 'htt
 
 -- BEST COFFEE SHOPS
 INSERT INTO maps (owner_id, title, description, image_url, lat, long)
-VALUES (3, 'Best Coffee Shops', 'Spots for a cozy coffee break', 'https://us.123rf.com/450wm/mergerr92/mergerr922401/mergerr92240110607/222885349-coffee-cup-on-wooden-table-in-coffee-shop-stock-photo.jpg?ver=6', 49.1946, -122.8828);
+VALUES (3, 'Best Coffee Shops', 'Spots for a cozy coffee break', 'https://www.posist.com/restaurant-times/wp-content/uploads/2023/07/How-To-Start-A-Coffee-Shop-Business-A-Complete-Guide.jpg', 49.1946, -122.8828);
+-- INSERT INTO maps (owner_id, title, description, image_url, lat, long)
+-- VALUES (3, 'Best Coffee Shops', 'Spots for a cozy coffee break', 'https://us.123rf.com/450wm/mergerr92/mergerr922401/mergerr92240110607/222885349-coffee-cup-on-wooden-table-in-coffee-shop-stock-photo.jpg?ver=6', 49.1946, -122.8828);
 
 -- LOCAL ART GALLERIES
 INSERT INTO maps (owner_id, title, description, image_url, lat, long)

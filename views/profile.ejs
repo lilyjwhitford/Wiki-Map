@@ -28,9 +28,10 @@
 
 <main>
   <div class="maps-container">
+
+    <!-- Maps column is under My Maps -->
     <div class="maps-column">
         <h3>My Maps</h3>
-      
             <!-- loop to get each map the user has created -->
             <div class="all-maps">
               <% for (let map of user.owned) { %>
@@ -45,6 +46,8 @@
                 <% } %>
             </div>
     </div>
+
+    <!-- Favourites section -->
     <div class="maps-favourites-column">
         <h3>My Favorite Maps</h3>
           <!-- loop to get each map the user has favourited -->
@@ -61,6 +64,7 @@
               <% } %>
           </div>
     </div>
+
 </div>
 </main>
 
