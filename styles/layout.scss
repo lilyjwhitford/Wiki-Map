@@ -57,6 +57,11 @@ input[type="text"]:hover {
   box-shadow: 0 2px 0 black;
 }
 
+/* Auto fill background will stay the same */
+input:-webkit-autofill {
+  -webkit-box-shadow: 0 0 0 30px #bfcc94 inset !important;
+}
+
 .box button {
   width: 100%;
   padding: 10px;
