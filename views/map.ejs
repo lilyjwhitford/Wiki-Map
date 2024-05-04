@@ -148,6 +148,7 @@
        // load map and marker data from database to the map
        currentMap = loadMap(data);
        currentMap.on("click", event => {
+        $('#add-marker-form').show();
                 console.log(event);
                 const lat = event.latlng.lat;
                 const long = event.latlng.lng;
@@ -163,6 +164,7 @@
          // serialize form data
          let formData = $(this).serialize();
          console.log(formData);
+         $('#add-marker-form').hide();
          // post request to add the new marker data to the database
          $.ajax({
            method: "POST",
@@ -178,13 +180,14 @@
                currentMap = loadMap(mapDataResponse);
 
               // could be added to edit if we want
-              //  currentMap.on("click", event => {
-              //   console.log(event);
-              //   const lat = event.latlng.lat;
-              //   const long = event.latlng.lng;
-              //   $('.edit-marker-lat').val(lat);
-              //   $('.edit-marker-long').val(long);
-              //  })
+               currentMap.on("click", event => {
+                $('#add-marker-form').show();
+                console.log(event);
+                const lat = event.latlng.lat;
+                const long = event.latlng.lng;
+                $('.marker-lat').val(lat);
+                $('.marker-long').val(long);
+               })
 
              })
            }
